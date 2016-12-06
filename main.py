@@ -3,6 +3,7 @@ from tasks import day2
 from tasks import day3
 from tasks import day4
 from tasks import day5
+from tasks import day6
 
 
 def main():
@@ -18,8 +19,11 @@ def main():
     day4.puzzle1()
     day4.puzzle2()
 
-    day5.puzzle1()
-    day5.puzzle2()
+    # day5.puzzle1()
+    # day5.puzzle2()
+
+    day6.puzzle1()
+    day6.puzzle2()
 
 
 if __name__ == '__main__':
