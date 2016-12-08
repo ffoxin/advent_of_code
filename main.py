@@ -1,29 +1,34 @@
-from tasks import day1
-from tasks import day2
-from tasks import day3
-from tasks import day4
-from tasks import day5
-from tasks import day6
+from importlib import import_module
+
+
+from datetime import datetime, tzinfo, timedelta
 
 
 def main():
-    day1.puzzle1()
-    day1.puzzle2()
+    class FixedOffset(tzinfo):
+        """Fixed offset in minutes east from UTC."""
+        ZERO = timedelta(0)
+        HOUR = timedelta(hours=1)
 
-    day2.puzzle1()
-    day2.puzzle2()
+        def __init__(self, offset, name):
+            self.__offset = timedelta(minutes=offset)
+            self.__name = name
 
-    day3.puzzle1()
-    day3.puzzle2()
+        def utcoffset(self, dt):
+            return self.__offset
 
-    day4.puzzle1()
-    day4.puzzle2()
+        def tzname(self, dt):
+            return self.__name
 
-    # day5.puzzle1()
-    # day5.puzzle2()
+        def dst(self, dt):
+            return self.ZERO
 
-    day6.puzzle1()
-    day6.puzzle2()
+    aoc_now = datetime.now(tz=FixedOffset(-5 * 60, 'AoC'))
+    puzzle_module = 'tasks.day{}'.format(aoc_now.day)
+    module = import_module(puzzle_module)
+
+    module.puzzle1()
+    module.puzzle2()
 
 
 if __name__ == '__main__':
