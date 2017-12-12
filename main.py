@@ -21,8 +21,10 @@ def main():
     puzzle_module = f'tasks.{YEAR}.{last_day}'
     module = import_module(puzzle_module)
 
-    module.puzzle1()
-    module.puzzle2()
+    if hasattr(module, 'puzzle2'):
+        module.puzzle2()
+    else:
+        module.puzzle1()
 
 
 if __name__ == '__main__':
