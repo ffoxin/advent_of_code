@@ -18,7 +18,7 @@ def main():
     days = sorted(days, key=lambda x: int(x[3:-3]))
     last_day = os.path.splitext(days[-1])[0]
     # create module path
-    puzzle_module = f'tasks.{YEAR}.{last_day}'
+    puzzle_module = 'tasks.{}.{}'.format(YEAR, last_day)
     module = import_module(puzzle_module)
 
     if hasattr(module, 'puzzle2'):
