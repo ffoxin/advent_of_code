@@ -9,20 +9,21 @@ def data_path(day_py):
     return os.path.join(day_path, 'data', day.replace('.py', '.txt'))
 
 
-def run(year):
-    # get days path
-    days_path = os.path.join(os.path.curdir, 'tasks', year)
-    # get solutions
-    days = {
-        int(filename[3:-3]): filename[:-3]
-        for filename in os.listdir(days_path)
-        if filename.startswith('day') and filename.endswith('.py')
-    }
-    # days = [i for i in os.listdir(days_path) if i.startswith('day') and os.path.splitext(i)[1] == '.py']
-    # find last day
-    last_day = days[sorted(days.keys())[-1]]
+def run(year, day=None):
+    if day is None:
+        # get days path
+        days_path = os.path.join(os.path.curdir, 'tasks', year)
+        # get solutions
+        days = {
+            int(filename[3:-3]): filename[:-3]
+            for filename in os.listdir(days_path)
+            if filename.startswith('day') and filename.endswith('.py')
+        }
+        # days = [i for i in os.listdir(days_path) if i.startswith('day') and os.path.splitext(i)[1] == '.py']
+        # find last day
+        day = days[sorted(days.keys())[-1]]
     # create module path
-    puzzle_module = 'tasks.{}.{}'.format(year, last_day)
+    puzzle_module = 'tasks.{}.{}'.format(year, day)
     module = import_module(puzzle_module)
 
     if hasattr(module, 'puzzle2'):
@@ -37,7 +38,12 @@ def main():
     else:
         year = str(datetime.utcnow().year)
 
-    run(year)
+    if len(sys.argv) > 2:
+        day = sys.argv[2]
+    else:
+        day = 'day{}'.format(datetime.utcnow().day)
+
+    run(year, day)
 
 
 if __name__ == '__main__':
