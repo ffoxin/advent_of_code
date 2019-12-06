@@ -3,6 +3,8 @@ import sys
 from datetime import datetime
 from importlib import import_module
 
+import click
+
 
 def data_path(day_py):
     day_path, day = os.path.split(day_py)
@@ -21,6 +23,7 @@ def run(year, day=None):
         }
         # days = [i for i in os.listdir(days_path) if i.startswith('day') and os.path.splitext(i)[1] == '.py']
         # find last day
+        print('day', day)
         day = days[sorted(days.keys())[-1]]
     # create module path
     puzzle_module = 'tasks.{}.{}'.format(year, day)
@@ -32,16 +35,19 @@ def run(year, day=None):
         module.puzzle1()
 
 
-def main():
-    if len(sys.argv) > 1:
-        year = sys.argv[1]
-    else:
-        year = str(datetime.utcnow().year)
+@click.command()
+@click.option('--year', '-y', type=int, default=None)
+@click.option('--day', '-d', type=int, default=None)
+def main(year, day):
+    if year is None:
+        year = datetime.utcnow().year
+    year = str(year)
 
-    if len(sys.argv) > 2:
-        day = sys.argv[2]
-    else:
-        day = 'day{}'.format(datetime.utcnow().day)
+    if day is None:
+        day = datetime.utcnow().day
+        print('Day not specified. Running: day', day)
+
+    day = 'day{}'.format(day)
 
     run(year, day)
 
