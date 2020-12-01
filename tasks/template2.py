@@ -4,7 +4,15 @@ DATA = (Path(__file__).parent / 'data' / '{}').read_text()
 
 
 def puzzle1():
-    pass
+    entries = [i for i in DATA.split('\n') if i]
+
 
 # def puzzle2():
-#     pass
+#     entries = [i for i in DATA.split('\n') if i]
+
+
+if __name__ == '__main__':
+    try:
+        puzzle2()
+    except:
+        puzzle1()
