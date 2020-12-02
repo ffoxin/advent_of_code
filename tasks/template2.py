@@ -14,5 +14,7 @@ def puzzle1():
 if __name__ == '__main__':
     try:
         puzzle2()
-    except:
+    except NameError as e:
+        if str(e) != "name 'puzzle2' is not defined":
+            raise
         puzzle1()
