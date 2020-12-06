@@ -63,7 +63,7 @@ class LedNet:
 
 
 def puzzle1():
-    data = 'tasks/data/day8.txt'
+    data = 'tasks/2016/data/day8.txt'
 
     leds = LedNet(50, 6)
 
@@ -76,7 +76,7 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/data/day8.txt'
+    data = 'tasks/2016/data/day8.txt'
 
     leds = LedNet(50, 6)
 
