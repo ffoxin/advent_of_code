@@ -1,4 +1,3 @@
-from collections import defaultdict
 from pathlib import Path
 
 DATA = (Path(__file__).parent / 'data' / 'day9.txt').read_text()
