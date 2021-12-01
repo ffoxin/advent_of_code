@@ -95,7 +95,9 @@ def main():
         day_path.touch()
         day_path.write_text(template_path.read_text().format(str(data.name)))
 
-    puzzle_module = str(day_path).replace('.py', '').replace('/', '.')
+    day_path_relative = str(day_path)[len(str(project_dir)) + 1:]
+    puzzle_module = day_path_relative.replace('.py', '').replace('/', '.')
+    print(f'Puzzle module: {puzzle_module}')
     module = import_module(puzzle_module)
 
     if puzzle:

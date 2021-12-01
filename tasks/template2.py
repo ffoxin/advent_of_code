@@ -1,14 +1,16 @@
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / '{}').read_text()
+DATA = (Path(__file__).parent / 'data' / 'day1.txt').read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = list(filter(bool, DATA.split('\n')))
+    # entries = list(map(int, filter(bool, DATA.split('\n'))))
 
 
 # def puzzle2():
-#     entries = [i for i in DATA.split('\n') if i]
+#     entries = list(filter(bool, DATA.split('\n')))
+#     # entries = list(map(int, filter(bool, DATA.split('\n'))))
 
 
 if __name__ == '__main__':
