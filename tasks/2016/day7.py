@@ -1,6 +1,6 @@
 def has_pattern(line):
     for i in range(len(line) - 3):
-        sub = line[i:i + 4]
+        sub = line[i : i + 4]
         if sub[0] == sub[3] and sub[1] == sub[2] and sub[0] != sub[1]:
             return True
 
@@ -8,7 +8,7 @@ def has_pattern(line):
 def get_bab_patterns(part):
     ssls = []
     for i in range(len(part) - 2):
-        sub = part[i:i + 3]
+        sub = part[i : i + 3]
         if sub[0] == sub[2] and sub[0] != sub[1]:
             ssls.append(sub[1] + sub[0] + sub[1])
     return ssls
@@ -19,14 +19,14 @@ def is_support_ssl(part, ssls):
 
 
 def puzzle1():
-    data = 'tasks/data/day7.txt'
+    data = "tasks/data/day7.txt"
 
     count = 0
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
-            line = line.replace('[', ']')
-            parts = line.split(']')
+            line = line.replace("[", "]")
+            parts = line.split("]")
 
             is_valid = True
             if any(map(has_pattern, parts[1::2])):
@@ -39,14 +39,14 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/data/day7.txt'
+    data = "tasks/data/day7.txt"
 
     count = 0
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
-            line = line.replace('[', ']')
-            parts = line.split(']')
+            line = line.replace("[", "]")
+            parts = line.split("]")
 
             ssls = []
             for part in parts[::2]:
@@ -58,5 +58,3 @@ def puzzle2():
                     break
 
     print(count)
-
-

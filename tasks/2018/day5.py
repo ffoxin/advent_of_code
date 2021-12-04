@@ -4,28 +4,26 @@ DATA = data_path(__file__)
 
 
 class Place:
-
     def __init__(self, value, enabled):
         self.value = value
         self.enabled = enabled
 
     def __repr__(self):
-        return f'<{self.value}, {self.enabled}>'
+        return f"<{self.value}, {self.enabled}>"
 
 
 class Node:
-
     def __init__(self, value):
         self.value = ord(value)
         self.next = None
         self.prev = None
 
     def __repr__(self):
-        return f'<{chr(self.value)}>'
+        return f"<{chr(self.value)}>"
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         line = f.read()
 
     line = line.strip()
@@ -81,13 +79,13 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         line = f.read()
 
     line = line.strip()
 
     shortest = None
-    for j in range(ord('A'), ord('Z') + 1):
+    for j in range(ord("A"), ord("Z") + 1):
         skip = frozenset((j, j + 32))
 
         head = None

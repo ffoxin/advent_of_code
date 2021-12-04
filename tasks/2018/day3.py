@@ -6,7 +6,6 @@ DATA = data_path(__file__)
 
 
 class Rect:
-
     def __init__(self, claim_id, left, top, width, height):
         self.claim_id = claim_id
         self.x1 = left
@@ -17,7 +16,9 @@ class Rect:
         self.y2 = top + height
 
     def __repr__(self):
-        return f'{self.x1}:{self.y1} -> {self.x2}:{self.y2} - {self.width}x{self.height}'
+        return (
+            f"{self.x1}:{self.y1} -> {self.x2}:{self.y2} - {self.width}x{self.height}"
+        )
 
 
 def check_intersect(rect1: Rect, rect2: Rect):
@@ -33,12 +34,12 @@ def check_intersect(rect1: Rect, rect2: Rect):
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
 
-    pattern = re.compile(r'#(\d+) @ (\d+),(\d+): (\d+)x(\d+)')
+    pattern = re.compile(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
     claims = [Rect(*map(int, pattern.match(line).groups())) for line in lines]
     requested = set()
     intersected = set()
@@ -54,12 +55,12 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
 
-    pattern = re.compile(r'#(\d+) @ (\d+),(\d+): (\d+)x(\d+)')
+    pattern = re.compile(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
     claims = [Rect(*map(int, pattern.match(line).groups())) for line in lines]
     requested = set()
     intersected = set()

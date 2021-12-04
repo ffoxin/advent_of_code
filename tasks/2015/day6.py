@@ -2,7 +2,7 @@ import re
 
 
 class LedNet:
-    _pattern = re.compile('(turn on|turn off|toggle) (\d+),(\d+) through (\d+),(\d+)')
+    _pattern = re.compile("(turn on|turn off|toggle) (\d+),(\d+) through (\d+),(\d+)")
 
     def __init__(self, width, height):
         self._width = width
@@ -21,17 +21,17 @@ class LedNet:
         command = result[0]
         x1, y1, x2, y2 = tuple([int(value) for value in result[1:]])
 
-        assert x1 <= x2, 'x1 > x2'
-        assert y1 <= y2, 'y1 > y2'
+        assert x1 <= x2, "x1 > x2"
+        assert y1 <= y2, "y1 > y2"
 
-        if command == 'turn on':
+        if command == "turn on":
             f = on
-        elif command == 'turn off':
+        elif command == "turn off":
             f = off
-        elif command == 'toggle':
+        elif command == "toggle":
             f = toggle
         else:
-            assert False, 'Invalid command'
+            assert False, "Invalid command"
 
         for i in range(x1, x2 + 1):
             for j in range(y1, y2 + 1):
@@ -65,8 +65,8 @@ class LedNet:
 
     def print(self):
         for line in self._leds:
-            print(''.join(['0' if led else '.' for led in line]))
-        print('---')
+            print("".join(["0" if led else "." for led in line]))
+        print("---")
 
     def sum(self):
         count = 0
@@ -76,11 +76,11 @@ class LedNet:
 
 
 def puzzle1():
-    data = 'tasks/2015/data/day6.txt'
+    data = "tasks/2015/data/day6.txt"
 
     leds = LedNet(1000, 1000)
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
             leds.process1(line)
@@ -89,11 +89,11 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/2015/data/day6.txt'
+    data = "tasks/2015/data/day6.txt"
 
     leds = LedNet(1000, 1000)
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
             leds.process2(line)

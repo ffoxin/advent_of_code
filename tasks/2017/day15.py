@@ -1,4 +1,3 @@
-
 start_a = 883
 start_b = 879
 factor_a = 16807

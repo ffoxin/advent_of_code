@@ -6,7 +6,6 @@ DATA = data_path(__file__)
 
 
 class Room:
-
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -17,7 +16,6 @@ class Room:
 
 
 class Link:
-
     def __init__(self, x1, x2, y1, y2):
         self.x1 = x1
         self.y1 = y1
@@ -26,7 +24,6 @@ class Link:
 
 
 class Field:
-
     def __init__(self):
         self.links = set()
         self.x = 0
@@ -37,16 +34,16 @@ class Field:
     def add_link(self, direction):
         x = self.x
         y = self.y
-        if direction == 'N':
+        if direction == "N":
             y -= 1
-        elif direction == 'S':
+        elif direction == "S":
             y += 1
-        elif direction == 'W':
+        elif direction == "W":
             x -= 1
-        elif direction == 'E':
+        elif direction == "E":
             x += 1
         else:
-            raise RuntimeError('Unknown direction: {}'.format(direction))
+            raise RuntimeError("Unknown direction: {}".format(direction))
 
         self.links.add((self.x, self.y, x, y))
 
@@ -62,22 +59,22 @@ class Field:
         pos = 0
         while True:
             ch = line[pos]
-            if ch in 'NSWE':
+            if ch in "NSWE":
                 self.add_link(ch)
-            elif ch == '(':
+            elif ch == "(":
                 depth = 1
                 end_pos = pos + 1
                 while depth != 0:
-                    if line[end_pos] == '(':
+                    if line[end_pos] == "(":
                         depth += 1
-                    elif line[end_pos] == ')':
+                    elif line[end_pos] == ")":
                         depth -= 1
                     end_pos += 1
                 self.analyze()
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     line = lines[0].strip()[1:-1]
@@ -85,9 +82,9 @@ def puzzle1():
     max_depth = 0
     depth = 0
     for i in line:
-        if i == '(':
+        if i == "(":
             depth += 1
-        elif i == ')':
+        elif i == ")":
             depth -= 1
         if depth > max_depth:
             max_depth = depth
@@ -98,15 +95,14 @@ def puzzle1():
     field = Field()
     pos = 0
     while True:
-        if pos in 'NSWE':
+        if pos in "NSWE":
             field.add_link(pos)
-        elif pos == '(':
+        elif pos == "(":
             field.new_state(pos)
-        elif pos == ')':
+        elif pos == ")":
             pass
-        elif pos == '|':
+        elif pos == "|":
             field.new_state(pos)
-
 
 
 # def puzzle2():

@@ -1,7 +1,7 @@
 def analyze_file():
-    data = 'tasks/data/day6.txt'
+    data = "tasks/data/day6.txt"
     freq = []
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
             if len(freq) == 0:
@@ -17,7 +17,7 @@ def analyze_file():
 def puzzle1():
     freq = analyze_file()
 
-    answer = ''
+    answer = ""
     for char in freq:
         stats = sorted(char, key=char.get)
         answer += stats[-1][0]
@@ -28,7 +28,7 @@ def puzzle1():
 def puzzle2():
     freq = analyze_file()
 
-    answer = ''
+    answer = ""
     for char in freq:
         stats = sorted(char, key=char.get)
         answer += stats[0][0]

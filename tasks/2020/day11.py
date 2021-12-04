@@ -1,36 +1,39 @@
 from itertools import product
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day11.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day11.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
     width = len(entries[0])
     height = len(entries)
 
     def check(row, column):
         count = 0
-        for r, c in product(
-                range(row - 1, row + 2),
-                range(column - 1, column + 2)
-        ):
-            if r < 0 or c < 0 or r >= height or c >= width or (r == row and c == column):
+        for r, c in product(range(row - 1, row + 2), range(column - 1, column + 2)):
+            if (
+                r < 0
+                or c < 0
+                or r >= height
+                or c >= width
+                or (r == row and c == column)
+            ):
                 continue
-            count += entries[r][c] == '#'
+            count += entries[r][c] == "#"
         return count
 
     while True:
         # print('\n'.join(entries) + '\n=====')
-        next_step = ['' for _ in range(height)]
+        next_step = ["" for _ in range(height)]
         for i in range(height):
             for j in range(width):
                 occupied = check(i, j)
                 current = entries[i][j]
-                if current == 'L' and occupied == 0:
-                    seat = '#'
-                elif current == '#' and occupied >= 4:
-                    seat = 'L'
+                if current == "L" and occupied == 0:
+                    seat = "#"
+                elif current == "#" and occupied >= 4:
+                    seat = "L"
                 else:
                     seat = entries[i][j]
                 next_step[i] += seat
@@ -39,11 +42,11 @@ def puzzle1():
             break
         entries = next_step
 
-    print(sum(line.count('#') for line in entries))
+    print(sum(line.count("#") for line in entries))
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
     width = len(entries[0])
     height = len(entries)
 
@@ -60,9 +63,9 @@ def puzzle2():
                 c += ic
                 if r == height_target or c == width_target:
                     break
-                if entries[r][c] == 'L':
+                if entries[r][c] == "L":
                     break
-                if entries[r][c] == '#':
+                if entries[r][c] == "#":
                     count += 1
                     break
 
@@ -70,15 +73,15 @@ def puzzle2():
 
     while True:
         # print('\n'.join(entries) + '\n=====')
-        next_step = ['' for _ in range(height)]
+        next_step = ["" for _ in range(height)]
         for i in range(height):
             for j in range(width):
                 occupied = check(i, j)
                 current = entries[i][j]
-                if current == 'L' and occupied == 0:
-                    seat = '#'
-                elif current == '#' and occupied >= 5:
-                    seat = 'L'
+                if current == "L" and occupied == 0:
+                    seat = "#"
+                elif current == "#" and occupied >= 5:
+                    seat = "L"
                 else:
                     seat = entries[i][j]
                 next_step[i] += seat
@@ -87,10 +90,10 @@ def puzzle2():
             break
         entries = next_step
 
-    print(sum(line.count('#') for line in entries))
+    print(sum(line.count("#") for line in entries))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

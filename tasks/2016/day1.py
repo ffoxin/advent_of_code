@@ -15,12 +15,12 @@ class Point:
         turn = step[0]
         distance = int(step[1:])
 
-        if turn == 'R':
+        if turn == "R":
             self._direction += 1
-        elif turn == 'L':
+        elif turn == "L":
             self._direction -= 1
         else:
-            assert False, 'Wrong turn'
+            assert False, "Wrong turn"
         self._direction %= 4
 
         if self._direction == 0:
@@ -36,7 +36,7 @@ class Point:
             visited = [(self._x - i - 1, self._y) for i in range(distance)]
             self._x -= distance
         else:
-            assert False, 'Invalid direction'
+            assert False, "Invalid direction"
 
         self._update_visits(visited)
 
@@ -58,18 +58,20 @@ class Point:
         return self._first_revisited
 
 
-way = 'R1, R1, R3, R1, R1, L2, R5, L2, R5, R1, R4, L2, R3, L3, R4, L5, R4, R4, R1, L5, L4, R5, R3, L1, R4, R3, ' \
-      'L2, L1, R3, L4, R3, L2, R5, R190, R3, R5, L5, L1, R54, L3, L4, L1, R4, R1, R3, L1, L1, R2, L2, R2, R5, ' \
-      'L3, R4, R76, L3, R4, R191, R5, R5, L5, L4, L5, L3, R1, R3, R2, L2, L2, L4, L5, L4, R5, R4, R4, R2, R3, ' \
-      'R4, L3, L2, R5, R3, L2, L1, R2, L3, R2, L1, L1, R1, L3, R5, L5, L1, L2, R5, R3, L3, R3, R5, R2, R5, R5, ' \
-      'L5, L5, R2, L3, L5, L2, L1, R2, R2, L2, R2, L3, L2, R3, L5, R4, L4, L5, R3, L4, R1, R3, R2, R4, L2, L3, ' \
-      'R2, L5, R5, R4, L2, R4, L1, L3, L1, L3, R1, R2, R1, L5, R5, R3, L3, L3, L2, R4, R2, L5, L1, L1, L5, L4, ' \
-      'L1, L1, R1 '
+way = (
+    "R1, R1, R3, R1, R1, L2, R5, L2, R5, R1, R4, L2, R3, L3, R4, L5, R4, R4, R1, L5, L4, R5, R3, L1, R4, R3, "
+    "L2, L1, R3, L4, R3, L2, R5, R190, R3, R5, L5, L1, R54, L3, L4, L1, R4, R1, R3, L1, L1, R2, L2, R2, R5, "
+    "L3, R4, R76, L3, R4, R191, R5, R5, L5, L4, L5, L3, R1, R3, R2, L2, L2, L4, L5, L4, R5, R4, R4, R2, R3, "
+    "R4, L3, L2, R5, R3, L2, L1, R2, L3, R2, L1, L1, R1, L3, R5, L5, L1, L2, R5, R3, L3, R3, R5, R2, R5, R5, "
+    "L5, L5, R2, L3, L5, L2, L1, R2, R2, L2, R2, L3, L2, R3, L5, R4, L4, L5, R3, L4, R1, R3, R2, R4, L2, L3, "
+    "R2, L5, R5, R4, L2, R4, L1, L3, L1, L3, R1, R2, R1, L5, R5, R3, L3, L3, L2, R4, R2, L5, L1, L1, L5, L4, "
+    "L1, L1, R1 "
+)
 
 
 def puzzle1():
     position = Point()
-    for step in way.split(', '):
+    for step in way.split(", "):
         position.feed(step)
 
     print(position.sum())
@@ -77,12 +79,12 @@ def puzzle1():
 
 def puzzle2():
     position = Point()
-    for step in way.split(', '):
+    for step in way.split(", "):
         position.feed(step)
 
     answer = position.get_twice_visited_distance()
 
     if answer is None:
-        print('No twice visited location found')
+        print("No twice visited location found")
     else:
         print(answer)

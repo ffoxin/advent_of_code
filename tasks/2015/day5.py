@@ -1,5 +1,5 @@
-vowels = 'aeiou'
-forbidden = ['ab', 'cd', 'pq', 'xy']
+vowels = "aeiou"
+forbidden = ["ab", "cd", "pq", "xy"]
 
 
 def condition1(s):
@@ -24,7 +24,7 @@ def is_nice(s):
 def condition_more_1(s):
     for i in range(len(s) - 1):
         sub = s[i] + s[i + 1]
-        if sub in s[i + 2:]:
+        if sub in s[i + 2 :]:
             return True
     return False
 
@@ -41,14 +41,14 @@ def is_more_nice(s):
 
 
 def puzzle1():
-    data = 'tasks/2015/data/day5.txt'
+    data = "tasks/2015/data/day5.txt"
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         print(sum(map(is_nice, f.readlines())))
 
 
 def puzzle2():
-    data = 'tasks/2015/data/day5.txt'
+    data = "tasks/2015/data/day5.txt"
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         print(sum(map(is_more_nice, f.readlines())))

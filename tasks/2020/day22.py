@@ -3,7 +3,7 @@ from functools import reduce
 from pathlib import Path
 from typing import Optional
 
-DATA = (Path(__file__).parent / 'data' / 'day22.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day22.txt").read_text()
 
 
 class Card:
@@ -70,7 +70,6 @@ class GameCount:
 
 
 class Game:
-
     def __init__(self, deck1: Deck, deck2: Deck):
         self.deck1 = deck1
         self.deck2 = deck2
@@ -82,7 +81,7 @@ class Game:
         self.game = GameCount.count
 
     def play(self):
-        print('=== Game {} ===\n'.format(self.game))
+        print("=== Game {} ===\n".format(self.game))
 
         rnd = 0
         while True:
@@ -95,9 +94,9 @@ class Game:
 
             rnd += 1
             values1, values2 = (deck.values() for deck in (self.deck1, self.deck2))
-            print('-- Round {} (Game {}) --'.format(rnd, self.game))
+            print("-- Round {} (Game {}) --".format(rnd, self.game))
             for index, values in enumerate((values1, values2), start=1):
-                print('Player {} deck: {}'.format(index, ', '.join(map(str, values))))
+                print("Player {} deck: {}".format(index, ", ".join(map(str, values))))
 
             # state = (tuple(values1), tuple(values2))
             # if state in self.states:
@@ -107,22 +106,24 @@ class Game:
             state1 = tuple(values1)
             state2 = tuple(values2)
             if state1 in self.state1 or state2 in self.state2:
-                print('HALT')
+                print("HALT")
                 return 1, values1
             self.state1.add(state1)
             self.state2.add(state2)
 
             card1, card2 = self.deck1.pop(), self.deck2.pop()
             if card1.value < len(values1) and card2.value < len(values2):
-                print('Playing a sub-game to determine the winner...\n')
-                if max(values1[1:card1.value + 1]) > max(values2[1:card2.value + 1]):
+                print("Playing a sub-game to determine the winner...\n")
+                if max(values1[1 : card1.value + 1]) > max(
+                    values2[1 : card2.value + 1]
+                ):
                     winner = 1
                 else:
                     winner, _ = Game(
                         self.deck1.copy(card1.value),
                         self.deck2.copy(card2.value),
                     ).play()
-                print('...anyway, back to game {}.'.format(self.game))
+                print("...anyway, back to game {}.".format(self.game))
             else:
                 if card1.value > card2.value:
                     winner = 1
@@ -134,16 +135,18 @@ class Game:
             else:
                 self.deck2.add(card2, card1)
 
-            print('Player {} wins round {} of game {}!\n'.format(winner, rnd, self.game))
+            print(
+                "Player {} wins round {} of game {}!\n".format(winner, rnd, self.game)
+            )
 
         return winner, (self.deck1 if winner == 1 else self.deck2).values()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
-    player_1_values = [int(i) for i in entries[1:entries.index('Player 2:')]]
-    player_2_values = [int(i) for i in entries[entries.index('Player 2:') + 1:]]
+    player_1_values = [int(i) for i in entries[1 : entries.index("Player 2:")]]
+    player_2_values = [int(i) for i in entries[entries.index("Player 2:") + 1 :]]
 
     decks = []
     for values in (player_1_values, player_2_values):
@@ -159,12 +162,16 @@ def puzzle1():
 
     rnd = 1
     while all(deck.top_card for deck in decks):
-        print('-- Round {} --'.format(rnd))
+        print("-- Round {} --".format(rnd))
         for index, deck in enumerate(decks):
-            print('Player {} deck: {}'.format(index + 1, ' ,'.join(map(str, decks[index].values()))))
+            print(
+                "Player {} deck: {}".format(
+                    index + 1, " ,".join(map(str, decks[index].values()))
+                )
+            )
         for index, value in enumerate(run_round(decks[0], decks[1])):
-            print('Player {} plays: {}'.format(index + 1, value))
-        print('')
+            print("Player {} plays: {}".format(index + 1, value))
+        print("")
         rnd += 1
 
     # total_cards = sum(map(len, (player_1_values, player_2_values)))
@@ -177,10 +184,10 @@ def puzzle1():
 
 
 def puzzle23():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
-    player_1_values = [int(i) for i in entries[1:entries.index('Player 2:')]]
-    player_2_values = [int(i) for i in entries[entries.index('Player 2:') + 1:]]
+    player_1_values = [int(i) for i in entries[1 : entries.index("Player 2:")]]
+    player_2_values = [int(i) for i in entries[entries.index("Player 2:") + 1 :]]
 
     deck1, deck2 = Deck(), Deck()
     for deck, values in ((deck1, player_1_values), (deck2, player_2_values)):
@@ -201,7 +208,7 @@ def puzzle23():
 
 
 def puzzle2():
-    deck1, deck2 = [i for i in DATA.split('\n\n')]
+    deck1, deck2 = [i for i in DATA.split("\n\n")]
     deck1 = list(map(int, deck1.splitlines()[1:]))
     deck2 = list(map(int, deck2.splitlines()[1:]))
 
@@ -219,8 +226,8 @@ def puzzle2():
             played.add(state)
 
             if d1[0] < len(d1) and d2[0] < len(d2):
-                nd1 = d1[1:d1[0] + 1]
-                nd2 = d2[1:d2[0] + 1]
+                nd1 = d1[1 : d1[0] + 1]
+                nd2 = d2[1 : d2[0] + 1]
                 if max(nd1) > max(nd2):
                     winner = 1
                 else:
@@ -242,7 +249,7 @@ def puzzle2():
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

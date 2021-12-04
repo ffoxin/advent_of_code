@@ -4,19 +4,19 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     result = 0
     for line in lines:
         values = list(map(int, line.split()))
-        result += (max(values) - min(values))
+        result += max(values) - min(values)
 
     print(result)
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     result = 0

@@ -24,16 +24,12 @@ def puzzle1():
     point = ()
     for x in range(300 - 2):
         for y in range(300 - 2):
-            power = sum((
-                grid[i][j]
-                for i in range(x, x + 3)
-                for j in range(y, y + 3)
-            ))
+            power = sum((grid[i][j] for i in range(x, x + 3) for j in range(y, y + 3)))
             if max_power is None or power > max_power:
                 max_power = power
                 point = (x + 1, y + 1)
 
-    print(','.join(map(str, point)))
+    print(",".join(map(str, point)))
 
 
 def puzzle2():
@@ -44,7 +40,7 @@ def puzzle2():
         for x in range(300):
             grid[x][y] = get_power(x + 1, y + 1, serial)
 
-    max_sum = - sys.maxsize - 1
+    max_sum = -sys.maxsize - 1
     max_x = 0
     max_y = 0
     max_size = 0
@@ -54,11 +50,11 @@ def puzzle2():
             for j in range(300 - size):
                 if size > 2:
                     current = (
-                            repo[(i, j, size - 1)] +
-                            repo[(i + 1, j + 1, size - 1)] -
-                            repo[(i + 1, j + 1, size - 2)] +
-                            grid[i + size - 1][j] +
-                            grid[i][j + size - 1]
+                        repo[(i, j, size - 1)]
+                        + repo[(i + 1, j + 1, size - 1)]
+                        - repo[(i + 1, j + 1, size - 2)]
+                        + grid[i + size - 1][j]
+                        + grid[i][j + size - 1]
                     )
                 else:
                     current = sum(
@@ -75,4 +71,4 @@ def puzzle2():
 
         print(size)
 
-    print('{},{},{}'.format(max_x + 1, max_y + 1, max_size))
+    print("{},{},{}".format(max_x + 1, max_y + 1, max_size))

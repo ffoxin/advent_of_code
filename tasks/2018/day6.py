@@ -6,17 +6,16 @@ DATA = data_path(__file__)
 
 
 class Cell:
-
     def __init__(self):
         self.parent = None
         self.distance = -1
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    lines = [tuple(map(int, item.split(','))) for item in lines]
+    lines = [tuple(map(int, item.split(","))) for item in lines]
 
     width = max([i[0] for i in lines]) + 2
     height = max([i[1] for i in lines]) + 2
@@ -41,10 +40,10 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    lines = [tuple(map(int, item.split(','))) for item in lines]
+    lines = [tuple(map(int, item.split(","))) for item in lines]
 
     width = max([i[0] for i in lines]) + 2
     height = max([i[1] for i in lines]) + 2

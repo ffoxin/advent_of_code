@@ -1,14 +1,14 @@
 from itertools import product
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day13.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day13.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     timestamp = int(entries[0])
-    buses = [int(i) for i in entries[1].split(',') if i != 'x']
+    buses = [int(i) for i in entries[1].split(",") if i != "x"]
 
     bus_found = None
     bus_wait = None
@@ -20,19 +20,19 @@ def puzzle1():
             bus_wait = 0 if before == 0 else wait
 
     if bus_found is None:
-        print('Nothing found')
+        print("Nothing found")
 
     print(bus_found, bus_wait)
     print(bus_found * bus_wait)
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     buses = [
         (int(bus), index)
-        for index, bus in enumerate(entries[1].split(','))
-        if bus != 'x'
+        for index, bus in enumerate(entries[1].split(","))
+        if bus != "x"
     ]
     for index, (bus, delay) in enumerate(buses):
         buses[index] = (bus, bus - delay)
@@ -67,7 +67,7 @@ def puzzle2():
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

@@ -54,7 +54,7 @@ def puzzle2():
         elif array[x][y + 1] and not array[x + 1][y]:
             return x + 1, y
         else:
-            raise RuntimeError('Cant find next: {}:{}'.format(x, y))
+            raise RuntimeError("Cant find next: {}:{}".format(x, y))
 
     current = array[x][y] = array[x + 1][y] = 1
     x += 1

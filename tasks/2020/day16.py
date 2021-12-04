@@ -1,21 +1,21 @@
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day16.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day16.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     rules = [
         tuple(
-            tuple(map(int, pair.split('-')))
-            for pair in entry.split(': ')[1].split(' or ')
+            tuple(map(int, pair.split("-")))
+            for pair in entry.split(": ")[1].split(" or ")
         )
-        for entry in entries[:entries.index('your ticket:')]
+        for entry in entries[: entries.index("your ticket:")]
     ]
     nearby = [
-        tuple(map(int, entry.split(',')))
-        for entry in entries[entries.index('nearby tickets:') + 1:]
+        tuple(map(int, entry.split(",")))
+        for entry in entries[entries.index("nearby tickets:") + 1 :]
     ]
 
     invalid_sum = 0
@@ -31,14 +31,13 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     class Rule:
         def __init__(self, line):
-            self.name, rest = line.split(': ')
+            self.name, rest = line.split(": ")
             self.ranges = tuple(
-                tuple(map(int, pair.split('-')))
-                for pair in rest.split(' or ')
+                tuple(map(int, pair.split("-"))) for pair in rest.split(" or ")
             )
 
         def is_valid(self, val):
@@ -47,23 +46,17 @@ def puzzle2():
 
     rules = {
         rule.name: rule
-        for rule in [
-            Rule(entry) for entry in entries[:entries.index('your ticket:')]
-        ]
+        for rule in [Rule(entry) for entry in entries[: entries.index("your ticket:")]]
     }
 
-    my_ticket = tuple(map(int, entries[entries.index('your ticket:') + 1].split(',')))
+    my_ticket = tuple(map(int, entries[entries.index("your ticket:") + 1].split(",")))
     nearby = [
-        tuple(map(int, entry.split(',')))
-        for entry in entries[entries.index('nearby tickets:') + 1:]
+        tuple(map(int, entry.split(",")))
+        for entry in entries[entries.index("nearby tickets:") + 1 :]
     ]
 
     allowed_fields = [
-        set([
-            name
-            for name, rule in rules.items()
-            if rule.is_valid(field)
-        ])
+        set([name for name, rule in rules.items() if rule.is_valid(field)])
         for field in my_ticket
     ]
 
@@ -103,7 +96,7 @@ def puzzle2():
     result = 1
     for index, s in enumerate(allowed_fields):
         item = list(s)[0]
-        if not item.startswith('departure'):
+        if not item.startswith("departure"):
             continue
         result *= my_ticket[index]
 
@@ -112,7 +105,7 @@ def puzzle2():
     #     print(len(s), s)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

@@ -13,7 +13,7 @@ class Status(Enum):
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     line = lines[0].strip()
@@ -23,30 +23,30 @@ def puzzle1():
     status = [Status.GROUP]
     for ch in line:
         if status[-1] == Status.GROUP:
-            if ch == '{':
+            if ch == "{":
                 level += 1
-            elif ch == '}':
+            elif ch == "}":
                 score += level
                 level -= 1
-            elif ch == '!':
+            elif ch == "!":
                 status.append(Status.SKIP)
-            elif ch == '<':
+            elif ch == "<":
                 status.append(Status.GARB)
             else:
                 RuntimeError(f'Transition from {status[-1].name} with "{ch}"')
         elif status[-1] == Status.SKIP:
             status.pop()
         elif status[-1] == Status.GARB:
-            if ch == '>':
+            if ch == ">":
                 status.pop()
-            elif ch == '!':
+            elif ch == "!":
                 status.append(Status.SKIP)
 
     print(score)
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     line = lines[0].strip()
@@ -56,22 +56,22 @@ def puzzle2():
     status = [Status.GROUP]
     for ch in line:
         if status[-1] == Status.GROUP:
-            if ch == '{':
+            if ch == "{":
                 level += 1
-            elif ch == '}':
+            elif ch == "}":
                 level -= 1
-            elif ch == '!':
+            elif ch == "!":
                 status.append(Status.SKIP)
-            elif ch == '<':
+            elif ch == "<":
                 status.append(Status.GARB)
             else:
                 RuntimeError(f'Transition from {status[-1].name} with "{ch}"')
         elif status[-1] == Status.SKIP:
             status.pop()
         elif status[-1] == Status.GARB:
-            if ch == '>':
+            if ch == ">":
                 status.pop()
-            elif ch == '!':
+            elif ch == "!":
                 status.append(Status.SKIP)
             else:
                 result += 1

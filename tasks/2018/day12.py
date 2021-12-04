@@ -7,38 +7,37 @@ DATA = data_path(__file__)
 
 
 class Rule:
-
     def __init__(self, line):
-        start, end = line.split(' => ')
+        start, end = line.split(" => ")
         self.start = start
         self.end = end
 
     def check(self, state, pos):
         if pos < 2:
-            return '.'
+            return "."
         elif pos + 3 > len(state):
-            return '.'
-        elif state[pos - 2:pos + 3] == self.start:
+            return "."
+        elif state[pos - 2 : pos + 3] == self.start:
             return self.end
         else:
             return None
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = list(map(str.strip, lines))
-    initial = lines[0].split(': ')[1]
+    initial = lines[0].split(": ")[1]
     rules = list(map(Rule, lines[2:]))
 
     start = 0
     for i in range(20):
-        if not initial.startswith('.....'):
-            initial = '.....' + initial
+        if not initial.startswith("....."):
+            initial = "....." + initial
             start -= 5
-        if not initial.endswith('.....'):
-            initial += '.....'
+        if not initial.endswith("....."):
+            initial += "....."
 
         state = []
         for j in range(len(initial)):
@@ -50,24 +49,24 @@ def puzzle1():
             if check is not None:
                 state.append(check)
             else:
-                state.append('.')
+                state.append(".")
 
-        initial = ''.join(state)
+        initial = "".join(state)
 
     result = 0
     for p in initial:
-        if p == '#':
+        if p == "#":
             result += start
         start += 1
     print(result)
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = list(map(str.strip, lines))
-    initial = lines[0].split(': ')[1]
+    initial = lines[0].split(": ")[1]
     rules = list(map(Rule, lines[2:]))
 
     start = 0
@@ -78,28 +77,28 @@ def puzzle2():
         # normalize start
         pot_start = 0
         while True:
-            if initial[pot_start] == '#':
+            if initial[pot_start] == "#":
                 break
             pot_start += 1
 
         if pot_start < 5:
-            initial = '.' * (5 - pot_start) + initial
+            initial = "." * (5 - pot_start) + initial
             start -= 5 - pot_start
         elif pot_start > 5:
-            initial = initial[pot_start - 5:]
+            initial = initial[pot_start - 5 :]
             start += pot_start - 5
 
         # normalize end
         pot_end = 0
         while True:
-            if initial[-1 - pot_end] == '#':
+            if initial[-1 - pot_end] == "#":
                 break
             pot_end += 1
 
         if pot_end < 5:
-            initial += '.' * (5 - pot_end)
+            initial += "." * (5 - pot_end)
         elif pot_end > 5:
-            initial = initial[:pot_end - 5]
+            initial = initial[: pot_end - 5]
 
         if prev == initial:
             break
@@ -117,15 +116,15 @@ def puzzle2():
             if check is not None:
                 state.append(check)
             else:
-                state.append('.')
+                state.append(".")
 
-        initial = ''.join(state)
+        initial = "".join(state)
         step += 1
 
     start = start + (50000000000 - step) * (start - prev_start)
     result = 0
     for p in initial:
-        if p == '#':
+        if p == "#":
             result += start
         start += 1
     print(result)

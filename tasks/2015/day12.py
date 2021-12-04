@@ -17,7 +17,7 @@ def json_sum(data):
 
 def json_sum_non_red(data):
     result = 0
-    if isinstance(data, dict) and 'red' not in data.values():
+    if isinstance(data, dict) and "red" not in data.values():
         for value in data.values():
             result += json_sum_non_red(value)
     elif isinstance(data, list):
@@ -30,9 +30,9 @@ def json_sum_non_red(data):
 
 
 def puzzle1():
-    data = 'tasks/2015/data/day12.txt'
+    data = "tasks/2015/data/day12.txt"
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         data = f.read()
 
     parsed = json.loads(data)
@@ -40,11 +40,10 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/2015/data/day12.txt'
+    data = "tasks/2015/data/day12.txt"
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         data = f.read()
 
     parsed = json.loads(data)
     print(json_sum_non_red(parsed))
-

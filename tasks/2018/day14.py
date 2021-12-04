@@ -14,18 +14,21 @@ def puzzle1():
 
     def get_div(index, start=True):
         if index == elf1:
-            result = '(' if start else ')'
+            result = "(" if start else ")"
         elif index == elf2:
-            result = '[' if start else ']'
+            result = "[" if start else "]"
         else:
-            result = ' '
+            result = " "
 
         return result
 
     def print_board():
-        print(''.join(
-            '{}{}{}'.format(get_div(i), e, get_div(i, False)) for i, e in enumerate(scoreboard)
-        ))
+        print(
+            "".join(
+                "{}{}{}".format(get_div(i), e, get_div(i, False))
+                for i, e in enumerate(scoreboard)
+            )
+        )
 
     print_board()
     while True:
@@ -44,13 +47,13 @@ def puzzle1():
         elf2 = (elf2 + 1 + scoreboard[elf2]) % len(scoreboard)
 
     # print_board()
-    print(''.join(map(str, scoreboard[-10:])))
+    print("".join(map(str, scoreboard[-10:])))
 
 
 def puzzle2():
-    target = '920831'
+    target = "920831"
 
-    scoreboard = '37'
+    scoreboard = "37"
 
     elf1 = 0
     elf2 = 1

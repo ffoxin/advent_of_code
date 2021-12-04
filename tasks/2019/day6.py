@@ -7,7 +7,7 @@ DATA = data_path(__file__)
 
 class Link:
     def __init__(self, value):
-        self.center, self.planet = value.split(')')
+        self.center, self.planet = value.split(")")
 
 
 def puzzle1():
@@ -15,28 +15,28 @@ def puzzle1():
         lines = list(map(str.strip, f.readlines()))
 
     lines1 = [
-        'COM)B',
-        'B)C',
-        'C)D',
-        'D)E',
-        'E)F',
-        'B)G',
-        'G)H',
-        'D)I',
-        'E)J',
-        'J)K',
-        'K)L',
+        "COM)B",
+        "B)C",
+        "C)D",
+        "D)E",
+        "E)F",
+        "B)G",
+        "G)H",
+        "D)I",
+        "E)J",
+        "J)K",
+        "K)L",
     ]
 
     orbits = {}
     for line in lines:
-        a, b = line.split(')')
+        a, b = line.split(")")
         orbits[b] = a
 
     total = 0
     for key, value in orbits.items():
         count = 1
-        while value != 'COM':
+        while value != "COM":
             count += 1
             value = orbits[value]
         # print(key, count)
@@ -50,36 +50,36 @@ def puzzle2():
         lines = list(map(str.strip, f.readlines()))
 
     lines1 = [
-        'COM)B',
-        'B)C',
-        'C)D',
-        'D)E',
-        'E)F',
-        'B)G',
-        'G)H',
-        'D)I',
-        'E)J',
-        'J)K',
-        'K)L',
-        'K)YOU',
-        'I)SAN',
+        "COM)B",
+        "B)C",
+        "C)D",
+        "D)E",
+        "E)F",
+        "B)G",
+        "G)H",
+        "D)I",
+        "E)J",
+        "J)K",
+        "K)L",
+        "K)YOU",
+        "I)SAN",
     ]
 
     orbits = {}
     for line in lines:
-        a, b = line.split(')')
+        a, b = line.split(")")
         orbits[b] = a
 
     def find_way(planet):
         way = []
-        while planet != 'COM':
+        while planet != "COM":
             next_planet = orbits[planet]
             way.append(next_planet)
             planet = next_planet
         return way
 
-    you = find_way('YOU')
-    san = find_way('SAN')
+    you = find_way("YOU")
+    san = find_way("SAN")
 
     # print(len(you), you)
     # print(len(san), san)

@@ -1,11 +1,11 @@
 from collections import Counter
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day10.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day10.txt").read_text()
 
 
 def puzzle1():
-    entries = [int(i) for i in DATA.split('\n') if i]
+    entries = [int(i) for i in DATA.split("\n") if i]
 
     entries.extend([0, max(entries) + 3])
     entries = sorted(entries)
@@ -16,7 +16,7 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = [int(i) for i in DATA.split('\n') if i]
+    entries = [int(i) for i in DATA.split("\n") if i]
 
     entries.extend([0, max(entries) + 3])
     entries = sorted(entries)
@@ -41,7 +41,7 @@ def puzzle2():
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

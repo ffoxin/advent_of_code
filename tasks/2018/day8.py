@@ -19,10 +19,10 @@ def node_sum(nums):
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         nums = f.read()
 
-    nums = list(map(int, nums.split(' ')))
+    nums = list(map(int, nums.split(" ")))
 
     _, meta_sum = node_sum(nums)
 
@@ -51,10 +51,10 @@ def node_sum2(nums):
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         nums = f.read()
 
-    nums = list(map(int, nums.split(' ')))
+    nums = list(map(int, nums.split(" ")))
 
     _, meta_sum = node_sum2(nums)
 

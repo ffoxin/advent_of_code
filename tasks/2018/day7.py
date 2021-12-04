@@ -5,12 +5,12 @@ DATA = data_path(__file__)
 
 class Requirement:
     def __init__(self, line):
-        parts = line.split(' ')
+        parts = line.split(" ")
         self.start = parts[1]
         self.end = parts[-3]
 
     def __repr__(self):
-        return f'{self.start} -> {self.end}'
+        return f"{self.start} -> {self.end}"
 
 
 def find_next(requirements):
@@ -29,17 +29,17 @@ def find_next(requirements):
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     requirements = set(map(Requirement, lines))
 
-    print(''.join(i for i in find_next(requirements)))
+    print("".join(i for i in find_next(requirements)))
     print(requirements)
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     requirements = set(map(Requirement, lines))
@@ -68,14 +68,14 @@ def puzzle2():
 
                 if to_start:
                     to_start = to_start[0]
-                    workers[i].extend([' '] * (second - len(workers[i])))
-                    workers[i].extend([to_start] * (ord(to_start) - ord('A') + 61))
+                    workers[i].extend([" "] * (second - len(workers[i])))
+                    workers[i].extend([to_start] * (ord(to_start) - ord("A") + 61))
                     in_progress.add(to_start)
                     result.append(to_start)
 
         print(second)
         for i in range(num_workers):
-            print(' ', workers[i])
+            print(" ", workers[i])
 
         if not todo:
             break

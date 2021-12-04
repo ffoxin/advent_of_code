@@ -1,10 +1,10 @@
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day9.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day9.txt").read_text()
 
 
 def puzzle1():
-    entries = [int(i) for i in DATA.split('\n') if i]
+    entries = [int(i) for i in DATA.split("\n") if i]
 
     preamble = 25
     for i in range(len(entries)):
@@ -28,12 +28,12 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = [int(i) for i in DATA.split('\n') if i]
+    entries = [int(i) for i in DATA.split("\n") if i]
 
     target = puzzle1()
     start, end = 0, 1
     while True:
-        s = sum(entries[start:end + 1])
+        s = sum(entries[start : end + 1])
         if s < target:
             end += 1
         elif s > target:
@@ -41,12 +41,12 @@ def puzzle2():
             if start == end:
                 end += 1
         else:
-            result = min(entries[start:end + 1]) + max(entries[start:end + 1])
+            result = min(entries[start : end + 1]) + max(entries[start : end + 1])
             print(result)
             break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

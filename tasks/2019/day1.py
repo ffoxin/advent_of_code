@@ -4,7 +4,7 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         modules = list(map(int, f.readlines()))
 
     def calc_fuel(mass):
@@ -21,7 +21,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         modules = list(map(int, f.readlines()))
 
     def calc_single_fuel(mass):

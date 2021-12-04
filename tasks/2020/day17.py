@@ -3,7 +3,7 @@ from itertools import product
 from pathlib import Path
 from typing import Tuple, Set, List
 
-DATA = (Path(__file__).parent / 'data' / 'day17.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day17.txt").read_text()
 
 
 def compare(pair, value):
@@ -36,14 +36,15 @@ def get_borders_n(state: Set[Tuple], n: int) -> List[Tuple[int, int]]:
 def print_state(state):
     mx, my, mz = get_borders(state)
 
-    print('x =', mx, '| y =', my, '| z =', mz)
+    print("x =", mx, "| y =", my, "| z =", mz)
     for z in range(mz[0], mz[1] + 1):
-        print('z =', z)
+        print("z =", z)
         for x in range(mx[0], mx[1] + 1):
-            print(''.join(
-                '#' if (x, y, z) in state else '.'
-                for y in range(my[0], my[1] + 1)
-            ))
+            print(
+                "".join(
+                    "#" if (x, y, z) in state else "." for y in range(my[0], my[1] + 1)
+                )
+            )
 
 
 def cycle(state):
@@ -51,9 +52,9 @@ def cycle(state):
 
     new_state = set()
     for x, y, z in product(
-            range(mx[0] - 1, mx[1] + 2),
-            range(my[0] - 1, my[1] + 2),
-            range(mz[0] - 1, mz[1] + 2),
+        range(mx[0] - 1, mx[1] + 2),
+        range(my[0] - 1, my[1] + 2),
+        range(mz[0] - 1, mz[1] + 2),
     ):
         active_count = 0
         for dx, dy, dz in product([-1, 0, 1], repeat=3):
@@ -73,10 +74,7 @@ def cycle_n(state: Set[Tuple], n: int):
     extremes = get_borders_n(state, n)
 
     new_state = set()
-    for this_point in product(*[
-        range(m[0] - 1, m[1] + 2)
-        for m in extremes
-    ]):
+    for this_point in product(*[range(m[0] - 1, m[1] + 2) for m in extremes]):
         active_count = 0
         for dp in product([-1, 0, 1], repeat=n):
             if not any(dp):
@@ -92,12 +90,12 @@ def cycle_n(state: Set[Tuple], n: int):
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     state = set()
     for i, line in enumerate(entries):
         for j, item in enumerate(line):
-            if item == '#':
+            if item == "#":
                 state.add((i, j, 0))
 
     for _ in range(6):
@@ -107,12 +105,12 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     state = set()
     for i, line in enumerate(entries):
         for j, item in enumerate(line):
-            if item == '#':
+            if item == "#":
                 state.add((i, j, 0, 0))
 
     for _ in range(6):
@@ -121,7 +119,7 @@ def puzzle2():
     print(len(state))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

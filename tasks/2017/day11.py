@@ -4,10 +4,10 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    steps = lines[0].strip().split(',')
+    steps = lines[0].strip().split(",")
 
     x = y = 0
 
@@ -16,23 +16,23 @@ def puzzle1():
 
     for step in steps:
         odd = x % 2 == 1
-        if step == 'n':
+        if step == "n":
             y += 1
-        elif step == 's':
+        elif step == "s":
             y -= 1
-        elif step == 'nw':
+        elif step == "nw":
             if odd:
                 y += 1
             x -= 1
-        elif step == 'ne':
+        elif step == "ne":
             if odd:
                 y += 1
             x += 1
-        elif step == 'sw':
+        elif step == "sw":
             if odd:
                 y -= 1
             x -= 1
-        elif step == 'se':
+        elif step == "se":
             if odd:
                 y -= 1
             x += 1
@@ -41,7 +41,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     # lines = ['ne,ne,ne']
@@ -49,7 +49,7 @@ def puzzle2():
     # lines = ['ne,ne,s,s']
     # lines = ['se,sw,se,sw,sw']
     # lines = ['se,sw']
-    steps = lines[0].strip().split(',')
+    steps = lines[0].strip().split(",")
 
     x = y = 0
 
@@ -60,23 +60,23 @@ def puzzle2():
 
     for step in steps:
         odd = x % 2 == 1
-        if step == 'n':
+        if step == "n":
             y += 1
-        elif step == 's':
+        elif step == "s":
             y -= 1
-        elif step == 'nw':
+        elif step == "nw":
             if odd:
                 y += 1
             x -= 1
-        elif step == 'ne':
+        elif step == "ne":
             if odd:
                 y += 1
             x += 1
-        elif step == 'sw':
+        elif step == "sw":
             if odd:
                 y -= 1
             x -= 1
-        elif step == 'se':
+        elif step == "se":
             if odd:
                 y -= 1
             x += 1

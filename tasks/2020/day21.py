@@ -3,17 +3,19 @@ from pathlib import Path
 
 from tabulate import tabulate
 
-DATA = (Path(__file__).parent / 'data' / 'day21.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day21.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     recipes = []
     for entry in entries:
-        ingred_raw, allerg_raw = entry.split(' (')
-        ingred = ingred_raw.split(' ')
-        allerg = allerg_raw[allerg_raw.find('contains') + len('contains') + 1:-1].split(', ')
+        ingred_raw, allerg_raw = entry.split(" (")
+        ingred = ingred_raw.split(" ")
+        allerg = allerg_raw[
+            allerg_raw.find("contains") + len("contains") + 1 : -1
+        ].split(", ")
         recipes.append((ingred, allerg))
         print(ingred, allerg)
 
@@ -43,14 +45,16 @@ def puzzle1():
         else:
             break
 
-    print(tabulate(
-        [
-            (item, len(value), ', '.join(sorted(value)))
-            for item, value in consist.items()
-        ],
-        headers=['allerg', 'len', 'igreds'],
-        tablefmt='psql'
-    ))
+    print(
+        tabulate(
+            [
+                (item, len(value), ", ".join(sorted(value)))
+                for item, value in consist.items()
+            ],
+            headers=["allerg", "len", "igreds"],
+            tablefmt="psql",
+        )
+    )
 
     defined = set(list(value)[0] for key, value in consist.items() if len(value) == 1)
     print(defined)
@@ -74,10 +78,10 @@ def puzzle2():
         if len(consist[allerg]) == 1
     ]
 
-    print(','.join(result))
+    print(",".join(result))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

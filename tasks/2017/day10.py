@@ -10,10 +10,10 @@ LEN = 256
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    lengths = list(map(int, lines[0].strip().split(',')))
+    lengths = list(map(int, lines[0].strip().split(",")))
 
     array = list(range(LEN))
     current = 0
@@ -33,7 +33,11 @@ def puzzle1():
             end %= LEN
             selected = list(reversed(array[start:] + array[:end]))
 
-            array = list(chain(selected[LEN - start:], array[end:start], selected[:LEN - start]))
+            array = list(
+                chain(
+                    selected[LEN - start :], array[end:start], selected[: LEN - start]
+                )
+            )
 
         current += l + skip
         current %= LEN
@@ -43,7 +47,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     # lines = ['']
@@ -70,14 +74,17 @@ def puzzle2():
             end %= LEN
             selected = list(reversed(array[start:] + array[:end]))
 
-            array = list(chain(selected[LEN - start:], array[end:start], selected[:LEN - start]))
+            array = list(
+                chain(
+                    selected[LEN - start :], array[end:start], selected[: LEN - start]
+                )
+            )
 
         current += l + skip
         current %= LEN
         skip += 1
 
-    hash_int = [reduce(xor, array[i:i + 16]) for i in range(0, 256, 16)]
-    hash_str = ''.join(map(lambda x: hex(x)[2:], hash_int))
+    hash_int = [reduce(xor, array[i : i + 16]) for i in range(0, 256, 16)]
+    hash_str = "".join(map(lambda x: hex(x)[2:], hash_int))
 
     print(hash_str)
-

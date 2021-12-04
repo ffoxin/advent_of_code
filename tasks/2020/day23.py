@@ -2,11 +2,11 @@ import operator
 from itertools import chain
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day23.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day23.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
     steps = int(entries[0])
     cups = list(map(int, entries[1]))
     for _ in range(steps):
@@ -21,11 +21,11 @@ def puzzle1():
                 continue
             index = rest.index(current)
             break
-        cups = rest[:index + 1] + picked + rest[index + 1:]
+        cups = rest[: index + 1] + picked + rest[index + 1 :]
         print(cups)
 
     index = cups.index(1)
-    print(''.join(map(str, cups[index + 1:] + cups[:index])))
+    print("".join(map(str, cups[index + 1 :] + cups[:index])))
 
     # print(cups)
 
@@ -50,15 +50,12 @@ class Game:
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
     steps = int(entries[0])
     limit = int(entries[1])
     cups = list(map(int, entries[2]))
     # map: cup -> next
-    game = {
-        cups[i]: cups[(i + 1) % len(cups)]
-        for i in range(len(cups))
-    }
+    game = {cups[i]: cups[(i + 1) % len(cups)] for i in range(len(cups))}
     if limit > len(cups):
         mac_cup = max(cups)
         game[cups[-1]] = mac_cup + 1
@@ -66,11 +63,11 @@ def puzzle2():
             game[i] = i + 1
         game[limit] = cups[0]
 
-    print('cups: {}'.format(len(game)))
+    print("cups: {}".format(len(game)))
 
     current = cups[0]
 
-    print('-'*40)
+    print("-" * 40)
     for _ in range(steps):
         picked = (game[current], game[game[current]], game[game[game[current]]])
         dest = current
@@ -90,7 +87,7 @@ def puzzle2():
     print(operator.mul(*pair))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-DATA = (Path(__file__).parent / 'data' / 'day5.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day5.txt").read_text()
 
 
 def execute(program: List[int], input_value) -> List[int]:
@@ -23,30 +23,46 @@ def execute(program: List[int], input_value) -> List[int]:
             value1, value2 = interpret_value(1), interpret_value(2)
             addr = program[ip + 3]
             program[addr] = value1 + value2
-            print('[{:04x}] {:4} <- {:<2}(+) {:4} {:4}'.format(
-                addr, program[addr], op, value1, value2
-            ))
+            print(
+                "[{:04x}] {:4} <- {:<2}(+) {:4} {:4}".format(
+                    addr, program[addr], op, value1, value2
+                )
+            )
             ip += 4
         elif op == 2:
             value1, value2 = interpret_value(1), interpret_value(2)
             addr = program[ip + 3]
             program[addr] = value1 * value2
-            print('[{:04x}] {:4} <- {:<2}(*) {:4} {:4}'.format(
-                addr, program[addr], op, value1, value2,
-            ))
+            print(
+                "[{:04x}] {:4} <- {:<2}(*) {:4} {:4}".format(
+                    addr,
+                    program[addr],
+                    op,
+                    value1,
+                    value2,
+                )
+            )
             ip += 4
         elif op == 3:
             addr = program[ip + 1]
             program[addr] = input_value
-            print('[{:04x}] {:4} <- {:<2}(in)'.format(
-                addr, program[addr], op,
-            ))
+            print(
+                "[{:04x}] {:4} <- {:<2}(in)".format(
+                    addr,
+                    program[addr],
+                    op,
+                )
+            )
             ip += 2
         elif op == 4:
             value = interpret_value(1)
-            print('[{:04x}] {:4} -> {:<2}(out)'.format(
-                0, value, op,
-            ))
+            print(
+                "[{:04x}] {:4} -> {:<2}(out)".format(
+                    0,
+                    value,
+                    op,
+                )
+            )
             print(value)
             ip += 2
         elif op == 5:
@@ -63,43 +79,55 @@ def execute(program: List[int], input_value) -> List[int]:
             value1, value2 = interpret_value(1), interpret_value(2)
             addr = program[ip + 3]
             program[addr] = 1 if (value1 < value2) else 0
-            print('[{:04x}] {:4} <- {:<2}(<) {:4} {:4}'.format(
-                addr, program[addr], op, value1, value2,
-            ))
+            print(
+                "[{:04x}] {:4} <- {:<2}(<) {:4} {:4}".format(
+                    addr,
+                    program[addr],
+                    op,
+                    value1,
+                    value2,
+                )
+            )
             ip += 4
         elif op == 8:
             value1, value2 = interpret_value(1), interpret_value(2)
             addr = program[ip + 3]
             program[addr] = 1 if (value1 == value2) else 0
-            print('[{:04x}] {:4} <- {:<2}(=) {:4} {:4}'.format(
-                addr, program[addr], op, value1, value2,
-            ))
+            print(
+                "[{:04x}] {:4} <- {:<2}(=) {:4} {:4}".format(
+                    addr,
+                    program[addr],
+                    op,
+                    value1,
+                    value2,
+                )
+            )
             ip += 4
         elif op == 99:
             break
         else:
-            raise RuntimeError('Unsupported opcode: {}'.format(op))
+            raise RuntimeError("Unsupported opcode: {}".format(op))
 
     return program
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
-    program = list(map(int, entries[0].split(',')))
+    program = list(map(int, entries[0].split(",")))
 
     result = execute(program, 1)
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
-    program = list(map(int, entries[0].split(',')))
+    program = list(map(int, entries[0].split(",")))
 
     execute(program, 5)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

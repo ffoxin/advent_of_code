@@ -11,10 +11,14 @@ def execute(program: List[int]) -> List[int]:
     while True:
         cmd = program[ip]
         if cmd == 1:
-            program[program[ip + 3]] = program[program[ip + 1]] + program[program[ip + 2]]
+            program[program[ip + 3]] = (
+                program[program[ip + 1]] + program[program[ip + 2]]
+            )
             ip += 4
         elif cmd == 2:
-            program[program[ip + 3]] = program[program[ip + 1]] * program[program[ip + 2]]
+            program[program[ip + 3]] = (
+                program[program[ip + 1]] * program[program[ip + 2]]
+            )
             ip += 4
         elif cmd == 99:
             break
@@ -24,14 +28,24 @@ def execute(program: List[int]) -> List[int]:
 
 def puzzle1():
     with open(DATA) as f:
-        int_code = list(map(int, f.read().split(',')))
+        int_code = list(map(int, f.read().split(",")))
 
     assert execute([1, 0, 0, 0, 99]) == [2, 0, 0, 0, 99], execute([1, 0, 0, 0, 99])
     assert execute([2, 3, 0, 3, 99]) == [2, 3, 0, 6, 99], execute([2, 3, 0, 3, 99])
-    assert execute([2, 4, 4, 5, 99, 0]) == [2, 4, 4, 5, 99, 9801], execute([2, 4, 4, 5, 99, 0])
-    assert execute([1, 1, 1, 4, 99, 5, 6, 0, 99]) == [30, 1, 1, 4, 2, 5, 6, 0, 99], execute(
-        [1, 1, 1, 4, 99, 5, 6, 0, 99]
+    assert execute([2, 4, 4, 5, 99, 0]) == [2, 4, 4, 5, 99, 9801], execute(
+        [2, 4, 4, 5, 99, 0]
     )
+    assert execute([1, 1, 1, 4, 99, 5, 6, 0, 99]) == [
+        30,
+        1,
+        1,
+        4,
+        2,
+        5,
+        6,
+        0,
+        99,
+    ], execute([1, 1, 1, 4, 99, 5, 6, 0, 99])
 
     int_code[1] = 12
     int_code[2] = 2
@@ -42,7 +56,7 @@ def puzzle1():
 
 def puzzle2():
     with open(DATA) as f:
-        int_code = list(map(int, f.read().split(',')))
+        int_code = list(map(int, f.read().split(",")))
 
     for i, j in product(range(100), range(100)):
         program_copy = list(int_code)
@@ -55,4 +69,4 @@ def puzzle2():
             print(i * 100 + j)
             return
 
-    print('nothing found')
+    print("nothing found")

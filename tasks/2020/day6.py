@@ -1,10 +1,10 @@
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day6.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day6.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n')]
+    entries = [i for i in DATA.split("\n")]
     groups = [set()]
     for entry in entries:
         if not entry:
@@ -18,7 +18,7 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n')]
+    entries = [i for i in DATA.split("\n")]
     groups = [[]]
     for entry in entries:
         if not entry:
@@ -30,7 +30,7 @@ def puzzle2():
     print(sum(len(set.intersection(*map(set, group))) for group in groups if group))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

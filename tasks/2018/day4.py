@@ -16,37 +16,36 @@ class ActionType(Enum):
 
 
 class Record:
-
     def __init__(self, line):
-        timestamp, action = line.split('] ')
+        timestamp, action = line.split("] ")
 
-        self.timestamp = datetime.strptime(timestamp, '[%Y-%m-%d %H:%M')
+        self.timestamp = datetime.strptime(timestamp, "[%Y-%m-%d %H:%M")
 
-        action = action.split(' ')
-        if action[0] == 'falls':
+        action = action.split(" ")
+        if action[0] == "falls":
             self.action = ActionType.Sleep
             self.id = None
-        elif action[0] == 'wakes':
+        elif action[0] == "wakes":
             self.action = ActionType.Wake
             self.id = None
-        elif action[0] == 'Guard':
+        elif action[0] == "Guard":
             self.action = ActionType.Begin
             self.id = int(action[1][1:])
         else:
-            raise RuntimeError('Unexpected action: {}'.format(line))
+            raise RuntimeError("Unexpected action: {}".format(line))
 
     def __str__(self):
-        return f'<Record {self.timestamp} {self.id} {self.action}>'
+        return f"<Record {self.timestamp} {self.id} {self.action}>"
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
 
     lines = [Record(line) for line in lines]
-    lines = sorted(lines, key=attrgetter('timestamp'))
+    lines = sorted(lines, key=attrgetter("timestamp"))
 
     guards = defaultdict(lambda: defaultdict(int))
     current = None
@@ -55,7 +54,7 @@ def puzzle1():
     for line in lines:
         if line.action == ActionType.Begin:
             if action == ActionType.Sleep:
-                raise RuntimeError('Hey, he slept before me! {}'.format(line))
+                raise RuntimeError("Hey, he slept before me! {}".format(line))
             current = line.id
             action = ActionType.Wake
         elif line.action == ActionType.Sleep:
@@ -80,13 +79,13 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
 
     lines = [Record(line) for line in lines]
-    lines = sorted(lines, key=attrgetter('timestamp'))
+    lines = sorted(lines, key=attrgetter("timestamp"))
 
     guards = defaultdict(lambda: defaultdict(int))
     current = None
@@ -95,7 +94,7 @@ def puzzle2():
     for line in lines:
         if line.action == ActionType.Begin:
             if action == ActionType.Sleep:
-                raise RuntimeError('Hey, he slept before me! {}'.format(line))
+                raise RuntimeError("Hey, he slept before me! {}".format(line))
             current = line.id
             action = ActionType.Wake
         elif line.action == ActionType.Sleep:

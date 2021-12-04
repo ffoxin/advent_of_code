@@ -4,16 +4,19 @@ class Triangle:
 
     def is_possible(self):
         for i in range(3):
-            if self._values[i % 3] + self._values[(i + 1) % 3] <= self._values[(i + 2) % 3]:
+            if (
+                self._values[i % 3] + self._values[(i + 1) % 3]
+                <= self._values[(i + 2) % 3]
+            ):
                 return False
         return True
 
 
 def puzzle1():
-    data = 'tasks/data/day3.txt'
+    data = "tasks/data/day3.txt"
 
     possible_count = 0
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             triangle = Triangle(line.split())
             if triangle.is_possible():
@@ -23,10 +26,10 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/data/day3.txt'
+    data = "tasks/data/day3.txt"
 
     possible_count = 0
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         values = []
         for line in f.readlines():
             values += line.split()

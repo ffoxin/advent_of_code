@@ -2,7 +2,7 @@ import operator
 from pathlib import Path
 from typing import Optional, Callable
 
-DATA = (Path(__file__).parent / 'data' / 'day18.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day18.txt").read_text()
 
 
 def get_bracket_ranges(expr):
@@ -10,9 +10,9 @@ def get_bracket_ranges(expr):
     bracket_map = {}
 
     for index, item in enumerate(expr):
-        if item == '(':
+        if item == "(":
             bracket_range.append((index,))
-        elif item == ')':
+        elif item == ")":
             for i in range(len(bracket_range) - 1, -1, -1):
                 if len(bracket_range[i]) == 1:
                     bracket_range[i] = (bracket_range[i][0], index)
@@ -34,10 +34,12 @@ def evaluate(expr):
         pos = lpos + 1
         while pos < rpos:
             literal = expr[pos]
-            if literal.isdigit() or literal == '(':
-                if literal == '(':
+            if literal.isdigit() or literal == "(":
+                if literal == "(":
                     if pos not in calculated_map:
-                        raise RuntimeError('Range {} not calculated yet'.format(bracket_map[pos]))
+                        raise RuntimeError(
+                            "Range {} not calculated yet".format(bracket_map[pos])
+                        )
                     value = calculated_map[pos]
                     pos = bracket_map[pos][1] + 1
                 else:
@@ -48,18 +50,18 @@ def evaluate(expr):
                     result = value
                 else:
                     if op is None:
-                        raise RuntimeError('Op is undefined at pos: {}'.format(pos))
+                        raise RuntimeError("Op is undefined at pos: {}".format(pos))
                     result = op(result, value)
-            elif literal == '+':
+            elif literal == "+":
                 op = operator.add
                 pos += 1
-            elif literal == '*':
+            elif literal == "*":
                 op = operator.mul
                 pos += 1
-            elif literal == ')':
+            elif literal == ")":
                 pos += 1
             else:
-                raise RuntimeError('Unknown literal: {}'.format(literal))
+                raise RuntimeError("Unknown literal: {}".format(literal))
 
         calculated_map[lpos] = result
 
@@ -70,9 +72,11 @@ def evaluate(expr):
 
 
 def puzzle1():
-    entries = ['(' + i + ')' for i in DATA.split('\n') if i]
+    entries = ["(" + i + ")" for i in DATA.split("\n") if i]
 
-    expressions = [entry.replace('(', '( ').replace(')', ' )').split(' ') for entry in entries]
+    expressions = [
+        entry.replace("(", "( ").replace(")", " )").split(" ") for entry in entries
+    ]
 
     answer = sum(map(evaluate, expressions))
 
@@ -80,9 +84,11 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = ['(' + i + ')' for i in DATA.split('\n') if i]
+    entries = ["(" + i + ")" for i in DATA.split("\n") if i]
 
-    expressions = [entry.replace('(', '( ').replace(')', ' )').split(' ') for entry in entries]
+    expressions = [
+        entry.replace("(", "( ").replace(")", " )").split(" ") for entry in entries
+    ]
 
     def do_find(expression, pos, direction):
         if direction == 1:
@@ -90,13 +96,13 @@ def puzzle2():
         elif direction == -1:
             r = range(pos, -1, -1)
         else:
-            raise RuntimeError('Unable to setup find: direction={}'.format(-1))
+            raise RuntimeError("Unable to setup find: direction={}".format(-1))
 
         balance = 0
         for i in r:
-            if expression[i] == '(':
+            if expression[i] == "(":
                 balance += 1
-            elif expression[i] == ')':
+            elif expression[i] == ")":
                 balance -= 1
             if balance == 0:
                 return i
@@ -112,34 +118,34 @@ def puzzle2():
     for expr in expressions:
         new_expression = list(expr)
         new_index = 0
-        print(' '.join(expr))
+        print(" ".join(expr))
         for index, literal in enumerate(expr):
             # debug
-            line = list(' ' * (len(new_expression) * 2))
-            line[new_index * 2] = '^'
+            line = list(" " * (len(new_expression) * 2))
+            line[new_index * 2] = "^"
             # end debug
-            if literal != '+':
+            if literal != "+":
                 # debug
-                print(''.join(line))
+                print("".join(line))
                 # end debug
                 new_index += 1
                 continue
             while new_expression[new_index] != literal:
                 new_index += 1
             # debug
-            line[new_index * 2] = '^'
+            line[new_index * 2] = "^"
 
             lpos = find_left_end(new_expression, new_index - 1)
             rpos = find_right_end(new_expression, new_index + 1)
-            line[2 * lpos - 1] = '('
-            line[2 * rpos + 1] = ')'
+            line[2 * lpos - 1] = "("
+            line[2 * rpos + 1] = ")"
             # debug
-            print(''.join(line))
+            print("".join(line))
             # end debug
 
-            if not (new_expression[lpos] == '(' and new_expression[rpos] == ')'):
-                new_expression.insert(rpos + 1, ')')
-                new_expression.insert(lpos, '(')
+            if not (new_expression[lpos] == "(" and new_expression[rpos] == ")"):
+                new_expression.insert(rpos + 1, ")")
+                new_expression.insert(lpos, "(")
 
                 if rpos == new_index + 1:
                     new_index += 3
@@ -148,22 +154,22 @@ def puzzle2():
             else:
                 new_index += 1
             # debug
-            print(' '.join(new_expression))
+            print(" ".join(new_expression))
             # end debug
 
         new_expressions.append(new_expression)
 
-        print(' '.join(new_expression))
+        print(" ".join(new_expression))
 
         answer = evaluate(new_expression)
-        print('answer =', answer)
-        print('')
+        print("answer =", answer)
+        print("")
 
     answer = sum(map(evaluate, new_expressions))
     print(answer)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

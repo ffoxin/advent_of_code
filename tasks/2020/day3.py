@@ -1,10 +1,10 @@
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day3.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day3.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
     x, y = 0, 0
     x_, y_ = 3, 1
     trees = 0
@@ -13,13 +13,13 @@ def puzzle1():
         y += y_
         if y == len(entries):
             break
-        trees += entries[y][x] == '#'
+        trees += entries[y][x] == "#"
 
     print(trees)
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     traverses = [
         (1, 1),
@@ -38,14 +38,14 @@ def puzzle2():
             y += y_
             if y >= len(entries):
                 break
-            trees += entries[y][x] == '#'
+            trees += entries[y][x] == "#"
 
         print(trees)
         result *= trees
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

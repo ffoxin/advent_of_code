@@ -6,9 +6,10 @@ DATA = data_path(__file__)
 
 
 class Point:
-
     def __init__(self, line):
-        groups = re.match(r'position=< *(-?\d+), *(-?\d+)> velocity=< *(-?\d+),  *(-?\d+)>\n?', line).groups()
+        groups = re.match(
+            r"position=< *(-?\d+), *(-?\d+)> velocity=< *(-?\d+),  *(-?\d+)>\n?", line
+        ).groups()
         groups = list(map(int, groups))
         self.x = groups[0]
         self.y = groups[1]
@@ -24,11 +25,11 @@ class Point:
         self.y -= self.dy
 
     def __repr__(self):
-        return f'<{self.x:>6}:{self.y:>6}|{self.dx:>3}:{self.dy:>3}>'
+        return f"<{self.x:>6}:{self.y:>6}|{self.dx:>3}:{self.dy:>3}>"
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     points = list(map(Point, lines))
@@ -63,16 +64,16 @@ def puzzle1():
 
     width = x_max - x_min + 1
     height = y_max - y_min + 1
-    matrix = [['.'] * width for _ in range(height)]
+    matrix = [["."] * width for _ in range(height)]
     for p in points:
-        matrix[p.y - y_min][p.x - x_min] = '#'
+        matrix[p.y - y_min][p.x - x_min] = "#"
 
     for line in matrix:
-        print(''.join(line))
+        print("".join(line))
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     points = list(map(Point, lines))

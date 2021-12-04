@@ -11,18 +11,18 @@ class Program:
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     programs = set()
     nested = set()
 
     for line in lines:
-        items = line.strip().split(' -> ')
+        items = line.strip().split(" -> ")
         if len(items) == 1:
             program = Program(*items[0].split())
         else:
-            program = Program(*items[0].split(), items[1].split(', '))
+            program = Program(*items[0].split(), items[1].split(", "))
 
         programs.add(program.name)
         nested.update(program.nested)
@@ -31,7 +31,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     programs = {}
@@ -39,11 +39,11 @@ def puzzle2():
     nested = set()
 
     for line in lines:
-        items = line.strip().split(' -> ')
+        items = line.strip().split(" -> ")
         if len(items) == 1:
             program = Program(*items[0].split())
         else:
-            program = Program(*items[0].split(), items[1].split(', '))
+            program = Program(*items[0].split(), items[1].split(", "))
 
         programs[program.name] = program
         names.add(program.name)
@@ -71,7 +71,9 @@ def puzzle2():
                 return nsum
 
         if any(value != nested_values[0] for value in nested_values):
-            return {name: (nested_sums[name], programs[name].weight) for name in this.nested}
+            return {
+                name: (nested_sums[name], programs[name].weight) for name in this.nested
+            }
 
         return this.weight + sum(nested_values)
 

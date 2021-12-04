@@ -1,13 +1,13 @@
 from collections import deque, defaultdict, Counter
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day15.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day15.txt").read_text()
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
-    numbers = list(map(int, entries[0].split(',')))
+    numbers = list(map(int, entries[0].split(",")))
 
     def iterable_rfind(it, target):
         for index, value in enumerate(reversed(it)):
@@ -20,19 +20,17 @@ def puzzle1():
         if count == 1:
             numbers.append(0)
         else:
-            numbers.append(
-                len(numbers) - 1 - iterable_rfind(numbers[:-1], last)
-            )
+            numbers.append(len(numbers) - 1 - iterable_rfind(numbers[:-1], last))
 
     print(numbers[-1])
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     target_index = 30000000
     numbers = [0 for i in range(target_index)]
-    start_numbers = list(map(int, entries[0].split(',')))
+    start_numbers = list(map(int, entries[0].split(",")))
     lasts = {}
 
     def update_lasts(value, position):
@@ -58,7 +56,7 @@ def puzzle2():
     print(answer)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

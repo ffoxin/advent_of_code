@@ -6,13 +6,13 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         frequency = sum(map(int, f.readlines()))
     print(frequency)
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         changes = list(map(int, f.readlines()))
 
     frequency = 0

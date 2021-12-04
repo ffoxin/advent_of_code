@@ -2,7 +2,7 @@ import re
 
 
 class LedNet:
-    _pattern = re.compile('(rect |rotate column x=|rotate row y=)(\d+)(x| by )(\d+)')
+    _pattern = re.compile("(rect |rotate column x=|rotate row y=)(\d+)(x| by )(\d+)")
 
     def __init__(self, width, height):
         self._width = width
@@ -18,14 +18,14 @@ class LedNet:
         command = result[0]
         x, y = tuple([int(value) for value in result[1::2]])
 
-        if command.startswith('rect'):
+        if command.startswith("rect"):
             f = rect
-        elif command.endswith('x='):
+        elif command.endswith("x="):
             f = rotate_x
-        elif command.endswith('y='):
+        elif command.endswith("y="):
             f = rotate_y
         else:
-            assert False, 'Invalid command: {}'.format(command)
+            assert False, "Invalid command: {}".format(command)
 
         f(x, y)
 
@@ -52,8 +52,8 @@ class LedNet:
 
     def print(self):
         for line in self._leds:
-            print(''.join(['#' if led else '.' for led in line]))
-        print('---')
+            print("".join(["#" if led else "." for led in line]))
+        print("---")
 
     def sum(self):
         count = 0
@@ -63,11 +63,11 @@ class LedNet:
 
 
 def puzzle1():
-    data = 'tasks/2016/data/day8.txt'
+    data = "tasks/2016/data/day8.txt"
 
     leds = LedNet(50, 6)
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
             leds.process(line)
@@ -76,11 +76,11 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/2016/data/day8.txt'
+    data = "tasks/2016/data/day8.txt"
 
     leds = LedNet(50, 6)
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         for line in f.readlines():
             line = line.strip()
             leds.process(line)

@@ -7,10 +7,10 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    template = re.compile(r'(\w+) (inc|dec) (-?\d+) if (\w+) ([<>=!]+) (-?\d+)')
+    template = re.compile(r"(\w+) (inc|dec) (-?\d+) if (\w+) ([<>=!]+) (-?\d+)")
     regs = defaultdict(int)
     for line in lines:
         a = template.match(line.strip())
@@ -18,29 +18,29 @@ def puzzle1():
 
         ival_cond = int(val_cond)
         ireg_cond = regs[reg_cond]
-        if op_cond == '>=':
+        if op_cond == ">=":
             if not (ireg_cond >= ival_cond):
                 continue
-        elif op_cond == '>':
+        elif op_cond == ">":
             if not (ireg_cond > ival_cond):
                 continue
-        elif op_cond == '<=':
+        elif op_cond == "<=":
             if not (ireg_cond <= ival_cond):
                 continue
-        elif op_cond == '==':
+        elif op_cond == "==":
             if not (ireg_cond == ival_cond):
                 continue
-        elif op_cond == '!=':
+        elif op_cond == "!=":
             if not (ireg_cond != ival_cond):
                 continue
-        elif op_cond == '<':
+        elif op_cond == "<":
             if not (ireg_cond < ival_cond):
                 continue
         else:
-            raise RuntimeError('Unexpected op_cond', op_cond)
+            raise RuntimeError("Unexpected op_cond", op_cond)
 
         ival = int(val)
-        if op == 'dec':
+        if op == "dec":
             ival *= -1
 
         regs[reg] += ival
@@ -49,10 +49,10 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    template = re.compile(r'(\w+) (inc|dec) (-?\d+) if (\w+) ([<>=!]+) (-?\d+)')
+    template = re.compile(r"(\w+) (inc|dec) (-?\d+) if (\w+) ([<>=!]+) (-?\d+)")
     regs = defaultdict(int)
     result = 0
     for line in lines:
@@ -61,29 +61,29 @@ def puzzle2():
 
         ival_cond = int(val_cond)
         ireg_cond = regs[reg_cond]
-        if op_cond == '>=':
+        if op_cond == ">=":
             if not (ireg_cond >= ival_cond):
                 continue
-        elif op_cond == '>':
+        elif op_cond == ">":
             if not (ireg_cond > ival_cond):
                 continue
-        elif op_cond == '<=':
+        elif op_cond == "<=":
             if not (ireg_cond <= ival_cond):
                 continue
-        elif op_cond == '==':
+        elif op_cond == "==":
             if not (ireg_cond == ival_cond):
                 continue
-        elif op_cond == '!=':
+        elif op_cond == "!=":
             if not (ireg_cond != ival_cond):
                 continue
-        elif op_cond == '<':
+        elif op_cond == "<":
             if not (ireg_cond < ival_cond):
                 continue
         else:
-            raise RuntimeError('Unexpected op_cond', op_cond)
+            raise RuntimeError("Unexpected op_cond", op_cond)
 
         ival = int(val)
-        if op == 'dec':
+        if op == "dec":
             ival *= -1
 
         regs[reg] += ival

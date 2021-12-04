@@ -2,7 +2,7 @@ from functools import reduce
 from itertools import product, chain
 from operator import xor
 
-DATA = 'jzgqcdpd'
+DATA = "jzgqcdpd"
 
 LEN = 256
 
@@ -29,35 +29,37 @@ def knot_hash(s):
             end %= LEN
             selected = list(reversed(array[start:] + array[:end]))
 
-            array = list(chain(selected[LEN - start:], array[end:start], selected[:LEN - start]))
+            array = list(
+                chain(
+                    selected[LEN - start :], array[end:start], selected[: LEN - start]
+                )
+            )
 
         current += l + skip
         current %= LEN
         skip += 1
 
-    hash_int = [reduce(xor, array[i:i + 16]) for i in range(0, 256, 16)]
-    hash_str = ''.join(map(lambda x: format(x, '02x'), hash_int))
+    hash_int = [reduce(xor, array[i : i + 16]) for i in range(0, 256, 16)]
+    hash_str = "".join(map(lambda x: format(x, "02x"), hash_int))
 
     return hash_str
 
 
-translate = {
-    str(i): format(i, '04b') for i in range(10)
-}
-translate.update({
-    chr(ch): format(ch - ord('a') + 10, '04b') for ch in range(ord('a'), ord('f') + 1)
-})
+translate = {str(i): format(i, "04b") for i in range(10)}
+translate.update(
+    {chr(ch): format(ch - ord("a") + 10, "04b") for ch in range(ord("a"), ord("f") + 1)}
+)
 
 
 def hash2bin(s):
-    return ''.join(translate[ch] for ch in s)
+    return "".join(translate[ch] for ch in s)
 
 
 def puzzle1():
     result = 0
     for i in range(128):
-        s = f'{DATA}-{i}'
-        result += hash2bin(knot_hash(s)).count('1')
+        s = f"{DATA}-{i}"
+        result += hash2bin(knot_hash(s)).count("1")
 
     print(result)
 
@@ -68,28 +70,30 @@ def puzzle2():
 
     disk = []
     for i in range(limit or 128):
-        result = f'{DATA}-{i}'
+        result = f"{DATA}-{i}"
         disk.append(list(hash2bin(knot_hash(result))))
 
     def mark(x, y):
-        if disk[x][y] != '1':
+        if disk[x][y] != "1":
             return 0
 
         added = {(x, y)}
         while added:
             next_add = set()
             for x1, y1 in added:
-                disk[x1][y1] = '#'
-                next_add.update({
-                    (x2, y2) for (x2, y2) in
-                    (
-                        (x1 + 1, y1),
-                        (x1 - 1, y1),
-                        (x1, y1 + 1),
-                        (x1, y1 - 1),
-                    )
-                    if 0 <= x2 < 128 and 0 <= y2 < 128 and disk[x2][y2] == '1'
-                })
+                disk[x1][y1] = "#"
+                next_add.update(
+                    {
+                        (x2, y2)
+                        for (x2, y2) in (
+                            (x1 + 1, y1),
+                            (x1 - 1, y1),
+                            (x1, y1 + 1),
+                            (x1, y1 - 1),
+                        )
+                        if 0 <= x2 < 128 and 0 <= y2 < 128 and disk[x2][y2] == "1"
+                    }
+                )
 
             added = next_add
 

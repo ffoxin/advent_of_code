@@ -6,7 +6,6 @@ DATA = data_path(__file__)
 
 
 class Interrupt(Exception):
-
     def __init__(self, value):
         self.value = value
 
@@ -18,57 +17,56 @@ class OpResult(enum.Enum):
 
 
 class Program:
-
     def __init__(self, p, lines):
         self.registers = {
-            'ip': 0,
-            'a': 0,
-            'b': 0,
-            'f': 0,
-            'i': 0,
-            'p': p,
+            "ip": 0,
+            "a": 0,
+            "b": 0,
+            "f": 0,
+            "i": 0,
+            "p": p,
         }
 
         self.program = []
         for line in lines:
-            args = line.split(' ')
+            args = line.split(" ")
             cmd = args[0]
-            if cmd == 'snd':
+            if cmd == "snd":
                 func = self.snd
-            elif cmd == 'set':
-                if args[2].startswith('-') or args[2].isdigit():
+            elif cmd == "set":
+                if args[2].startswith("-") or args[2].isdigit():
                     func = self.set_number
                 else:
                     func = self.set_register
-            elif cmd == 'add':
-                if args[2].startswith('-') or args[2].isdigit():
+            elif cmd == "add":
+                if args[2].startswith("-") or args[2].isdigit():
                     func = self.add_number
                 else:
                     func = self.add_register
-            elif cmd == 'mul':
-                if args[2].startswith('-') or args[2].isdigit():
+            elif cmd == "mul":
+                if args[2].startswith("-") or args[2].isdigit():
                     func = self.mul_number
                 else:
                     func = self.mul_register
-            elif cmd == 'mod':
-                if args[2].startswith('-') or args[2].isdigit():
+            elif cmd == "mod":
+                if args[2].startswith("-") or args[2].isdigit():
                     func = self.mod_number
                 else:
                     func = self.mod_register
-            elif cmd == 'rcv':
+            elif cmd == "rcv":
                 func = self.rcv
-            elif cmd == 'jgz':
-                if args[2].startswith('-') or args[2].isdigit():
+            elif cmd == "jgz":
+                if args[2].startswith("-") or args[2].isdigit():
                     func = self.jgz_number
                 else:
                     func = self.jgz_register
             else:
-                raise RuntimeError('unknown instruction: {}'.format(cmd))
+                raise RuntimeError("unknown instruction: {}".format(cmd))
             self.program.append(func(*args[1:]))
 
     def snd(self, register):
         def wrapper():
-            self.registers['snd'] = self.registers[register]
+            self.registers["snd"] = self.registers[register]
 
         return wrapper
 
@@ -123,14 +121,14 @@ class Program:
     def rcv(self, register):
         def wrapper():
             if self.registers[register] != 0:
-                raise Interrupt(self.registers['snd'])
+                raise Interrupt(self.registers["snd"])
 
         return wrapper
 
     def jgz_number(self, register, value):
         def wrapper():
             if self.registers[register] > 0:
-                self.registers['ip'] += int(value)
+                self.registers["ip"] += int(value)
                 return OpResult.Jump
 
         return wrapper
@@ -138,15 +136,15 @@ class Program:
     def jgz_register(self, register, value):
         def wrapper():
             if self.registers[register] > 0:
-                self.registers['ip'] += self.registers[value]
+                self.registers["ip"] += self.registers[value]
                 return OpResult.Jump
 
         return wrapper
 
     def execute(self):
-        result = self.program[self.registers['ip']]()
+        result = self.program[self.registers["ip"]]()
         if result != OpResult.Jump:
-            self.registers['ip'] += 1
+            self.registers["ip"] += 1
 
     def run(self):
         try:
@@ -157,7 +155,7 @@ class Program:
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
@@ -168,7 +166,6 @@ def puzzle1():
 
 
 class Program2(Program):
-
     def __init__(self, p, lines):
         super().__init__(p, lines)
 
@@ -195,15 +192,15 @@ class Program2(Program):
         return wrapper
 
     def execute(self):
-        result = self.program[self.registers['ip']]()
+        result = self.program[self.registers["ip"]]()
         if result != OpResult.Jump:
-            self.registers['ip'] += 1
+            self.registers["ip"] += 1
 
         return result
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = list(map(str.strip, lines))

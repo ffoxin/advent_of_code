@@ -4,25 +4,25 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines1 = [
-        '0 <-> 2',
-        '1 <-> 1',
-        '2 <-> 0, 3, 4',
-        '3 <-> 2, 4',
-        '4 <-> 2, 3, 6',
-        '5 <-> 6',
-        '6 <-> 4, 5',
+        "0 <-> 2",
+        "1 <-> 1",
+        "2 <-> 0, 3, 4",
+        "3 <-> 2, 4",
+        "4 <-> 2, 3, 6",
+        "5 <-> 6",
+        "6 <-> 4, 5",
     ]
 
     array = list(range(len(lines)))
 
     for line in lines:
-        program, pipes = line.split(' <-> ')
+        program, pipes = line.split(" <-> ")
         program = int(program)
-        pipes = list(map(int, pipes.split(', ')))
+        pipes = list(map(int, pipes.split(", ")))
 
         for pipe in pipes:
             s = {program, pipe, array[program], array[pipe]}
@@ -40,25 +40,25 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines1 = [
-        '0 <-> 2',
-        '1 <-> 1',
-        '2 <-> 0, 3, 4',
-        '3 <-> 2, 4',
-        '4 <-> 2, 3, 6',
-        '5 <-> 6',
-        '6 <-> 4, 5',
+        "0 <-> 2",
+        "1 <-> 1",
+        "2 <-> 0, 3, 4",
+        "3 <-> 2, 4",
+        "4 <-> 2, 3, 6",
+        "5 <-> 6",
+        "6 <-> 4, 5",
     ]
 
     array = list(range(len(lines)))
 
     for line in lines:
-        program, pipes = line.split(' <-> ')
+        program, pipes = line.split(" <-> ")
         program = int(program)
-        pipes = list(map(int, pipes.split(', ')))
+        pipes = list(map(int, pipes.split(", ")))
 
         for pipe in pipes:
             s = {program, pipe, array[program], array[pipe]}

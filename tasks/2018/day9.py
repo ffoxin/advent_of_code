@@ -7,10 +7,10 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         line = f.readline()
 
-    line = line.split(' ')
+    line = line.split(" ")
     players = int(line[0])
     last = int(line[-2])
 
@@ -48,10 +48,10 @@ class Circle:
             self.next = None
 
         def __repr__(self):
-            return '{} <- {} -> {}'.format(
-                self.prev.value if self.prev else '',
+            return "{} <- {} -> {}".format(
+                self.prev.value if self.prev else "",
                 self.value,
-                self.next.value if self.next else '',
+                self.next.value if self.next else "",
             )
 
     def __init__(self):
@@ -97,19 +97,24 @@ class Circle:
             sample.append(root.value)
             root = root.next
 
-        print('[{}]{}'.format(player + 1, ''.join(
-            '({:2})'.format(c)
-            if c == self.current.value else
-            ' {:2} '.format(c)
-            for c in sample
-        )))
+        print(
+            "[{}]{}".format(
+                player + 1,
+                "".join(
+                    "({:2})".format(c)
+                    if c == self.current.value
+                    else " {:2} ".format(c)
+                    for c in sample
+                ),
+            )
+        )
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         line = f.readline()
 
-    line = line.split(' ')
+    line = line.split(" ")
     players = int(line[0])
     last = int(line[-2]) * 100
 
@@ -127,6 +132,6 @@ def puzzle2():
         else:
             circle.insert_after(marble)
 
-    print('elapsed', time.time() - start)
+    print("elapsed", time.time() - start)
 
     print(max(scores))

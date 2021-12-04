@@ -2,7 +2,7 @@ import re
 
 
 def parse_towns(lines):
-    pattern = re.compile('(\w+) to (\w+) = (\d+)')
+    pattern = re.compile("(\w+) to (\w+) = (\d+)")
     towns = {}
     for line in lines:
         line = line.strip()
@@ -12,7 +12,7 @@ def parse_towns(lines):
         if town_to not in towns:
             towns[town_to] = {}
         if town_to in towns[town_from] or town_from in towns[town_to]:
-            assert False, 'Path {} - {} already added'.format(town_to, town_from)
+            assert False, "Path {} - {} already added".format(town_to, town_from)
         towns[town_from][town_to] = int(distance)
         towns[town_to][town_from] = int(distance)
     return towns
@@ -31,9 +31,9 @@ def get_solution(solution, towns):
 
 
 def puzzle1():
-    data = 'tasks/2015/data/day9.txt'
+    data = "tasks/2015/data/day9.txt"
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         lines = f.readlines()
 
     towns = parse_towns(lines)
@@ -50,9 +50,9 @@ def puzzle1():
 
 
 def puzzle2():
-    data = 'tasks/2015/data/day9.txt'
+    data = "tasks/2015/data/day9.txt"
 
-    with open(data, 'r') as f:
+    with open(data, "r") as f:
         lines = f.readlines()
 
     towns = parse_towns(lines)

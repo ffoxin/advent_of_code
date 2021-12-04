@@ -4,7 +4,7 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         data = f.read().strip()
 
     array = list(map(int, list(data)))
@@ -18,7 +18,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         data = f.read().strip()
 
     array = list(map(int, list(data)))

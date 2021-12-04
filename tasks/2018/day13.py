@@ -33,58 +33,56 @@ class Dir(Enum):
 
 
 class Cell:
-
     def __init__(self, ch):
-        if ch in '^v|':
+        if ch in "^v|":
             self.dir = Dir.Vert
-        elif ch in '<>-':
+        elif ch in "<>-":
             self.dir = Dir.Hor
-        elif ch == '+':
+        elif ch == "+":
             self.dir = Dir.Any
-        elif ch == '/':
+        elif ch == "/":
             self.dir = Dir.Diag
-        elif ch == '\\':
+        elif ch == "\\":
             self.dir = Dir.RevDiag
 
     def __str__(self):
         if self.dir == Dir.Vert:
-            return '|'
+            return "|"
         elif self.dir == Dir.Hor:
-            return '-'
+            return "-"
         elif self.dir == Dir.Any:
-            return '+'
+            return "+"
         elif self.dir == Dir.Diag:
-            return '/'
+            return "/"
         elif self.dir == Dir.RevDiag:
-            return '\\'
+            return "\\"
         elif self.dir == Dir.Crash:
-            return 'X'
+            return "X"
 
 
 class Cart:
-
     def __init__(self, x, y, ch):
         self.x = x
         self.y = y
         self.turn = self.next_turn()
-        if ch == '^':
+        if ch == "^":
             self.move = Move.Up
-        elif ch == 'v':
+        elif ch == "v":
             self.move = Move.Down
-        elif ch == '<':
+        elif ch == "<":
             self.move = Move.Left
-        elif ch == '>':
+        elif ch == ">":
             self.move = Move.Right
 
     def __str__(self):
         if self.move == Move.Up:
-            return '^'
+            return "^"
         elif self.move == Move.Down:
-            return 'v'
+            return "v"
         elif self.move == Move.Right:
-            return '>'
+            return ">"
         elif self.move == Move.Left:
-            return '<'
+            return "<"
 
     @staticmethod
     def next_turn():
@@ -120,10 +118,10 @@ class Cart:
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    lines = [line.strip('\n') for line in lines]
+    lines = [line.strip("\n") for line in lines]
     height = len(lines)
     width = max(map(len, lines))
 
@@ -131,10 +129,10 @@ def puzzle1():
     carts = {}
     for y, line in enumerate(lines):
         for x, ch in enumerate(line):
-            if ch == ' ':
+            if ch == " ":
                 continue
             field[(x, y)] = Cell(ch)
-            if ch in '<>^v':
+            if ch in "<>^v":
                 carts[(x, y)] = Cart(x, y, ch)
 
     def print_field():
@@ -147,13 +145,13 @@ def puzzle1():
                 elif point in field:
                     line.append(str(field[point]))
                 else:
-                    line.append(' ')
-            print(''.join(line))
+                    line.append(" ")
+            print("".join(line))
 
     point = None
     while True:
         crash = False
-        for cart in sorted(carts.values(), key=attrgetter('y', 'x')):
+        for cart in sorted(carts.values(), key=attrgetter("y", "x")):
             point = (cart.x, cart.y)
             cart.tick(field[point])
             carts.pop(point)
@@ -167,14 +165,14 @@ def puzzle1():
         if crash:
             break
 
-    print(','.join(map(str, point)))
+    print(",".join(map(str, point)))
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    lines = [line.strip('\n') for line in lines]
+    lines = [line.strip("\n") for line in lines]
     height = len(lines)
     width = max(map(len, lines))
 
@@ -182,10 +180,10 @@ def puzzle2():
     carts = {}
     for y, line in enumerate(lines):
         for x, ch in enumerate(line):
-            if ch == ' ':
+            if ch == " ":
                 continue
             field[(x, y)] = Cell(ch)
-            if ch in '<>^v':
+            if ch in "<>^v":
                 carts[(x, y)] = Cart(x, y, ch)
 
     def print_field():
@@ -198,13 +196,13 @@ def puzzle2():
                 elif point in field:
                     line.append(str(field[point]))
                 else:
-                    line.append(' ')
-            print(''.join(line))
+                    line.append(" ")
+            print("".join(line))
 
     # print_field()
     while True:
         crash = False
-        for cart in sorted(carts.values(), key=attrgetter('y', 'x')):
+        for cart in sorted(carts.values(), key=attrgetter("y", "x")):
             point = (cart.x, cart.y)
             if point not in carts:
                 continue
@@ -223,4 +221,4 @@ def puzzle2():
     # print_field()
 
     point = list(carts.keys())[0]
-    print(','.join(map(str, point)))
+    print(",".join(map(str, point)))

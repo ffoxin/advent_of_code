@@ -4,17 +4,17 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines1 = [
-        '0: 3',
-        '1: 2',
-        '4: 4',
-        '6: 4',
+        "0: 3",
+        "1: 2",
+        "4: 4",
+        "6: 4",
     ]
 
-    depth = {int(line.split(':')[0]): int(line.split(':')[1]) for line in lines}
+    depth = {int(line.split(":")[0]): int(line.split(":")[1]) for line in lines}
 
     result = 0
     for i, d in depth.items():
@@ -25,17 +25,17 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines1 = [
-        '0: 3',
-        '1: 2',
-        '4: 4',
-        '6: 4',
+        "0: 3",
+        "1: 2",
+        "4: 4",
+        "6: 4",
     ]
 
-    depth = {int(line.split(':')[0]): int(line.split(':')[1]) for line in lines}
+    depth = {int(line.split(":")[0]): int(line.split(":")[1]) for line in lines}
 
     found = False
     delay = 0

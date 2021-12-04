@@ -6,8 +6,8 @@ from typing import Optional, Tuple
 
 import click
 
-DAY_FORMAT = 'day{}.py'
-PUZZLE_FORMAT = 'puzzle{}'
+DAY_FORMAT = "day{}.py"
+PUZZLE_FORMAT = "puzzle{}"
 
 
 def get_default_year_path(tasks_path: Path) -> Path:
@@ -25,12 +25,12 @@ def get_default_day_path(default_year_path: Path) -> Path:
     days = [
         item.name[3:-3]
         for item in default_year_path.iterdir()
-        if item.is_file() and item.name.startswith('day') and item.name.endswith('.py')
+        if item.is_file() and item.name.startswith("day") and item.name.endswith(".py")
     ]
     if days:
         days = sorted(days, key=int)
     else:
-        days = ['1']
+        days = ["1"]
 
     return default_year_path / DAY_FORMAT.format(days[-1])
 
@@ -45,8 +45,8 @@ def to_int(value, default: int = None) -> Optional[int]:
 
 
 def parse_day(value: str) -> Tuple[Optional[int], Optional[int]]:
-    if '.' in value:
-        day, puzzle = value.split('.')
+    if "." in value:
+        day, puzzle = value.split(".")
         day = int(day) if day else None
         puzzle = int(puzzle) or None
     else:
@@ -57,13 +57,13 @@ def parse_day(value: str) -> Tuple[Optional[int], Optional[int]]:
 
 
 @click.command()
-@click.argument('day', type=click.IntRange(min=1, max=25), required=False)
-@click.argument('year', type=click.IntRange(min=2015, max=2021), required=False)
+@click.argument("day", type=click.IntRange(min=1, max=25), required=False)
+@click.argument("year", type=click.IntRange(min=2015, max=2021), required=False)
 def main(day, year):
     current_path = Path(__file__)
     project_dir = current_path.parent
-    tasks_path = project_dir / 'tasks'
-    template_path = project_dir / 'tasks' / 'template2.py'
+    tasks_path = project_dir / "tasks"
+    template_path = project_dir / "tasks" / "template2.py"
 
     puzzle = None
 
@@ -77,7 +77,7 @@ def main(day, year):
     else:
         day_path = year_path / DAY_FORMAT.format(day)
 
-    data_path = year_path / 'data' / (day_path.stem + '.txt')
+    data_path = year_path / "data" / (day_path.stem + ".txt")
 
     if not data_path.exists():
         data_path.touch()
@@ -86,9 +86,9 @@ def main(day, year):
         day_path.touch()
         day_path.write_text(template_path.read_text().format(str(data_path.name)))
 
-    day_path_relative = str(day_path)[len(str(project_dir)) + 1:]
-    puzzle_module = day_path_relative.replace('.py', '').replace('/', '.')
-    click.secho(f'{"Module: ":<10s}{puzzle_module}', fg='bright_black')
+    day_path_relative = str(day_path)[len(str(project_dir)) + 1 :]
+    puzzle_module = day_path_relative.replace(".py", "").replace("/", ".")
+    click.secho(f'{"Module: ":<10s}{puzzle_module}', fg="bright_black")
     module = import_module(puzzle_module)
 
     if puzzle:
@@ -97,11 +97,14 @@ def main(day, year):
         puzzle_id = 2 if hasattr(module, PUZZLE_FORMAT.format(2)) else 1
     puzzle_name = PUZZLE_FORMAT.format(puzzle_id)
 
-    click.secho(f'{"Data: ":<10s}{data_path.relative_to(current_path.parent)}', fg='bright_black')
-    click.secho(f'{"Puzzle: ":<10s}{puzzle_name}', fg='green')
+    click.secho(
+        f'{"Data: ":<10s}{data_path.relative_to(current_path.parent)}',
+        fg="bright_black",
+    )
+    click.secho(f'{"Puzzle: ":<10s}{puzzle_name}', fg="green")
 
     getattr(module, puzzle_name)()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

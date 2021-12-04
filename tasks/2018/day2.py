@@ -6,7 +6,7 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
@@ -27,7 +27,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = map(str.strip, lines)
@@ -44,7 +44,7 @@ def puzzle2():
             b = counts[j]
             if len(a & b) >= len(a) - 1:
                 diff = 0
-                common = ''
+                common = ""
                 for ca, cb in zip(lines[i], lines[j]):
                     if ca != cb:
                         diff += 1

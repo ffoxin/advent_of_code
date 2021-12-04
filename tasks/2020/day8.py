@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List, Callable, Tuple
 
-DATA = (Path(__file__).parent / 'data' / 'day8.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day8.txt").read_text()
 
 
 class Processor:
@@ -11,13 +11,13 @@ class Processor:
         self.code: List[Tuple[Callable, int]] = []
 
         for entry in entries:
-            op, arg = entry.split(' ')
+            op, arg = entry.split(" ")
             arg = int(arg)
-            if op == 'acc':
+            if op == "acc":
                 func = self.acc
-            elif op == 'jmp':
+            elif op == "jmp":
                 func = self.jmp
-            elif op == 'nop':
+            elif op == "nop":
                 func = self.nop
             else:
                 raise NotImplementedError()
@@ -39,7 +39,7 @@ class Processor:
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     proc = Processor(entries)
     sp = set()
@@ -52,7 +52,7 @@ def puzzle1():
 
 
 def puzzle2():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     proc = Processor(entries)
     found = False
@@ -86,7 +86,7 @@ def puzzle2():
     print(proc.accumulator)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

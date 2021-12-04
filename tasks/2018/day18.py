@@ -6,18 +6,18 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    field = [list(line.strip('\n')) for line in lines]
+    field = [list(line.strip("\n")) for line in lines]
 
     temp = [[None] * len(line) for line in field]
 
     def check(x, y):
         counts = {
-            '.': 0,
-            '|': 0,
-            '#': 0,
+            ".": 0,
+            "|": 0,
+            "#": 0,
         }
         for xi in range(max(0, x - 1), min(len(field), x + 2)):
             for yi in range(max(0, y - 1), min(len(field[0]), y + 2)):
@@ -25,23 +25,23 @@ def puzzle1():
                     continue
                 counts[field[xi][yi]] += 1
 
-        if field[x][y] == '.' and counts['|'] >= 3:
-            return '|'
-        elif field[x][y] == '|' and counts['#'] >= 3:
-            return '#'
-        elif field[x][y] == '#':
-            if counts['|'] >= 1 and counts['#'] >= 1:
-                return '#'
+        if field[x][y] == "." and counts["|"] >= 3:
+            return "|"
+        elif field[x][y] == "|" and counts["#"] >= 3:
+            return "#"
+        elif field[x][y] == "#":
+            if counts["|"] >= 1 and counts["#"] >= 1:
+                return "#"
             else:
-                return '.'
+                return "."
 
         return field[x][y]
 
     def print_field():
-        print('-' * len(field))
+        print("-" * len(field))
         for line in field:
-            print(''.join(line))
-        print('-' * len(field))
+            print("".join(line))
+        print("-" * len(field))
 
     print_field()
     for i in range(10):
@@ -57,22 +57,22 @@ def puzzle1():
         for ch in line:
             result[ch] += 1
 
-    print(result['|'] * result['#'])
+    print(result["|"] * result["#"])
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    field = [list(line.strip('\n')) for line in lines]
+    field = [list(line.strip("\n")) for line in lines]
 
     temp = [[None] * len(line) for line in field]
 
     def check(x, y):
         counts = {
-            '.': 0,
-            '|': 0,
-            '#': 0,
+            ".": 0,
+            "|": 0,
+            "#": 0,
         }
         for xi in range(max(0, x - 1), min(len(field), x + 2)):
             for yi in range(max(0, y - 1), min(len(field[0]), y + 2)):
@@ -80,15 +80,15 @@ def puzzle2():
                     continue
                 counts[field[xi][yi]] += 1
 
-        if field[x][y] == '.' and counts['|'] >= 3:
-            return '|'
-        elif field[x][y] == '|' and counts['#'] >= 3:
-            return '#'
-        elif field[x][y] == '#':
-            if counts['|'] >= 1 and counts['#'] >= 1:
-                return '#'
+        if field[x][y] == "." and counts["|"] >= 3:
+            return "|"
+        elif field[x][y] == "|" and counts["#"] >= 3:
+            return "#"
+        elif field[x][y] == "#":
+            if counts["|"] >= 1 and counts["#"] >= 1:
+                return "#"
             else:
-                return '.'
+                return "."
 
         return field[x][y]
 
@@ -102,16 +102,16 @@ def puzzle2():
 
         field, temp = temp, field
 
-        mark = ''.join(''.join(line) for line in field)
+        mark = "".join("".join(line) for line in field)
         if mark in history:
             second = history[mark]
-            print('start repeating from', second)
+            print("start repeating from", second)
             break
         else:
             history[mark] = second
 
-    print('history', len(history))
-    print('second', second)
+    print("history", len(history))
+    print("second", second)
 
     history_repeat = {}
     for key, value in history.items():
@@ -119,12 +119,14 @@ def puzzle2():
             history_repeat[key] = value - second
 
     result_second = (1000000000 - (second - 0)) % len(history_repeat)
-    result_mark = [key for key, value in history_repeat.items() if value == result_second][0]
+    result_mark = [
+        key for key, value in history_repeat.items() if value == result_second
+    ][0]
 
-    print('history_repeat', len(history_repeat))
-    print('result_second', result_second)
+    print("history_repeat", len(history_repeat))
+    print("result_second", result_second)
     print(result_mark)
 
-    result = result_mark.count('|') * result_mark.count('#')
+    result = result_mark.count("|") * result_mark.count("#")
 
     print(result)

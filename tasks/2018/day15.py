@@ -6,7 +6,6 @@ DATA = data_path(__file__)
 
 
 class Field:
-
     def __init__(self, field):
         self.width = len(field[0])
         self.height = len(field)
@@ -15,11 +14,11 @@ class Field:
         goblins = set()
         for y, line in enumerate(field):
             for x, ch in enumerate(line):
-                if ch == '#':
+                if ch == "#":
                     walls.add((x, y))
-                elif ch == 'E':
+                elif ch == "E":
                     elfs.add((x, y))
-                elif ch == 'G':
+                elif ch == "G":
                     goblins.add((x, y))
 
         self.walls = walls
@@ -45,14 +44,16 @@ class Field:
 
         points = []
         for xp, yp in in_range:
-            points.append({
-                'point': (xp, yp),
-                'distance': abs(x - xp) + abs(y - yp),
-                'x': xp,
-                'y': yp,
-            })
+            points.append(
+                {
+                    "point": (xp, yp),
+                    "distance": abs(x - xp) + abs(y - yp),
+                    "x": xp,
+                    "y": yp,
+                }
+            )
 
-        sorted_points = sorted(points, key=itemgetter('distance', 'y', 'x'))
+        sorted_points = sorted(points, key=itemgetter("distance", "y", "x"))
         closest = sorted_points[0]
 
         return closest
@@ -62,14 +63,15 @@ class Field:
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    data = [line.strip('\n') for line in lines]
+    data = [line.strip("\n") for line in lines]
     field = Field(data)
 
     for elf_point in field.elfs:
         print(field.find_target(elf_point, field.goblins))
+
 
 # def puzzle2():
 #     pass

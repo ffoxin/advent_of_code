@@ -4,44 +4,44 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    programs = [chr(i + ord('a')) for i in range(16)]
+    programs = [chr(i + ord("a")) for i in range(16)]
 
     # lines = ['s1,x3/4,pe/b']
     # programs = list('abcde')
 
-    commands = lines[0].split(',')
+    commands = lines[0].split(",")
 
     for command in commands[:50]:
         cmd, rest = command[0], command[1:]
-        if cmd == 's':
+        if cmd == "s":
             spin = int(rest)
             programs = programs[-spin:] + programs[:-spin]
-        elif cmd == 'x':
-            a, b = tuple(map(int, rest.split('/')))
+        elif cmd == "x":
+            a, b = tuple(map(int, rest.split("/")))
             programs[a], programs[b] = programs[b], programs[a]
-        elif cmd == 'p':
-            pa, pb = rest.split('/')
+        elif cmd == "p":
+            pa, pb = rest.split("/")
             a = programs.index(pa)
             b = programs.index(pb)
             programs[a], programs[b] = programs[b], programs[a]
 
-        print(command, ''.join(programs))
+        print(command, "".join(programs))
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
-    programs = [chr(i + ord('a')) for i in range(16)]
+    programs = [chr(i + ord("a")) for i in range(16)]
     starting = list(programs)
 
     # lines = ['s1,x3/4,pe/b']
     # programs = list('abcde')
 
-    commands = lines[0].split(',')
+    commands = lines[0].split(",")
 
     def spin(x):
         nonlocal programs
@@ -58,14 +58,14 @@ def puzzle2():
     cmd_list = []
     for command in commands:
         cmd, rest = command[0], command[1:]
-        if cmd == 's':
+        if cmd == "s":
             x = int(rest)
             cmd_list.append((spin, x))
-        elif cmd == 'x':
-            a, b = tuple(map(int, rest.split('/')))
+        elif cmd == "x":
+            a, b = tuple(map(int, rest.split("/")))
             cmd_list.append((exchange, a, b))
-        elif cmd == 'p':
-            pa, pb = rest.split('/')
+        elif cmd == "p":
+            pa, pb = rest.split("/")
             cmd_list.append((partner, pa, pb))
 
     total = 1000000000
@@ -83,4 +83,4 @@ def puzzle2():
             for cmd in cmd_list:
                 cmd[0](*cmd[1:])
 
-    print(''.join(programs))
+    print("".join(programs))

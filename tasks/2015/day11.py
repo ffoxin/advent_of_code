@@ -1,14 +1,18 @@
 class Password:
-    _first_index = ord('a')
-    _forbidden = [ord(char) - ord('a') for char in 'iol']
-    _max_char = ord('z') - ord('a')
+    _first_index = ord("a")
+    _forbidden = [ord(char) - ord("a") for char in "iol"]
+    _max_char = ord("z") - ord("a")
 
     def __init__(self, password):
         self._password = self._encode_password(password)
 
     def _condition1(self):
         for i in range(len(self._password) - 2):
-            if self._password[i] + 2 == self._password[i + 1] + 1 == self._password[i + 2]:
+            if (
+                self._password[i] + 2
+                == self._password[i + 1] + 1
+                == self._password[i + 2]
+            ):
                 return True
         return False
 
@@ -49,11 +53,11 @@ class Password:
 
     @classmethod
     def _decode_password(cls, password):
-        return ''.join(chr(char + cls._first_index) for char in password)
+        return "".join(chr(char + cls._first_index) for char in password)
 
 
 def puzzle1():
-    password = 'hxbxwxba'
+    password = "hxbxwxba"
 
     password = Password(password)
     password.next_password()

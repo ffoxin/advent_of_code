@@ -1,7 +1,7 @@
 from itertools import product
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day3.txt').read_text()
+DATA = (Path(__file__).parent / "data" / "day3.txt").read_text()
 
 
 def is_between(first, middle, last):
@@ -9,24 +9,24 @@ def is_between(first, middle, last):
 
 
 def puzzle1():
-    entries = [i for i in DATA.split('\n') if i]
+    entries = [i for i in DATA.split("\n") if i]
 
     wires = []
     for entry in entries:
-        moves = [(move[0], int(move[1:])) for move in entry.split(',')]
+        moves = [(move[0], int(move[1:])) for move in entry.split(",")]
         wire = [(0, 0)]
         for move, distance in moves:
             new = wire[-1]
-            if move == 'U':
+            if move == "U":
                 new = (new[0], new[1] + distance)
-            elif move == 'D':
+            elif move == "D":
                 new = (new[0], new[1] - distance)
-            elif move == 'R':
+            elif move == "R":
                 new = (new[0] + distance, new[1])
-            elif move == 'L':
+            elif move == "L":
                 new = (new[0] - distance, new[1])
             else:
-                raise RuntimeError('Dunno this move: {} {}'.format(move, distance))
+                raise RuntimeError("Dunno this move: {} {}".format(move, distance))
             wire.append(new)
         wires.append(wire)
 
@@ -45,7 +45,9 @@ def puzzle1():
             # swap if 1st line is vert - same x's
             w1p1, w1p2, w2p1, w2p2 = w2p1, w2p2, w1p1, w1p2
 
-        if not is_between(w1p1[0], w2p1[0], w1p2[0]) or not is_between(w2p1[1], w1p1[1], w2p2[1]):
+        if not is_between(w1p1[0], w2p1[0], w1p2[0]) or not is_between(
+            w2p1[1], w1p1[1], w2p2[1]
+        ):
             continue
 
         point = (w2p1[0], w1p1[1])
@@ -70,8 +72,13 @@ def puzzle2():
         # done = False
         for wire in wires:
             for i in range(len(wire) - 1):
-                (x1, y1), (x2, y2) = wire[i], wire[i+1]
-                if x1 == ix == x2 and is_between(y1, iy, y2) or is_between(x1, ix, x2) and y1 == iy == y2:
+                (x1, y1), (x2, y2) = wire[i], wire[i + 1]
+                if (
+                    x1 == ix == x2
+                    and is_between(y1, iy, y2)
+                    or is_between(x1, ix, x2)
+                    and y1 == iy == y2
+                ):
                     path_len += abs(ix - x1) + abs(iy - y1)
                     # done = True
                     break
@@ -87,7 +94,7 @@ def puzzle2():
     print(min(sums.values()))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         puzzle2()
     except NameError as e:

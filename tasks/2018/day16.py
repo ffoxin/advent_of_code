@@ -4,7 +4,7 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = [line.strip() for line in lines]
@@ -80,12 +80,12 @@ def puzzle1():
 
     count = 0
     for before, asm, after, _ in zip(*[iter(lines)] * 4):
-        if not before.startswith('Before'):
+        if not before.startswith("Before"):
             break
 
-        before = [int(i) for i in before[9:-1].split(',')]
-        asm = [int(i) for i in asm.split(' ')]
-        after = [int(i) for i in after[9:-1].split(',')]
+        before = [int(i) for i in before[9:-1].split(",")]
+        asm = [int(i) for i in asm.split(" ")]
+        after = [int(i) for i in after[9:-1].split(",")]
         print(before)
 
         noted = 0
@@ -101,7 +101,7 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     lines = [line.strip() for line in lines]
@@ -175,18 +175,15 @@ def puzzle2():
         eqrr,
     )
 
-    op_codes = {
-        i: set(ops)
-        for i in range(len(ops))
-    }
+    op_codes = {i: set(ops) for i in range(len(ops))}
 
     for before, asm, after, _ in zip(*[iter(lines)] * 4):
-        if not before.startswith('Before'):
+        if not before.startswith("Before"):
             break
 
-        before = [int(i) for i in before[9:-1].split(',')]
-        asm = [int(i) for i in asm.split(' ')]
-        after = [int(i) for i in after[9:-1].split(',')]
+        before = [int(i) for i in before[9:-1].split(",")]
+        asm = [int(i) for i in asm.split(" ")]
+        after = [int(i) for i in after[9:-1].split(",")]
 
         for op in ops:
             r = list(before)
@@ -208,7 +205,7 @@ def puzzle2():
     r = [0, 0, 0, 0]
 
     for asm in program:
-        asm = [int(i) for i in asm.split(' ')]
+        asm = [int(i) for i in asm.split(" ")]
         op_codes[asm[0]](*asm[1:])
 
     print(r[0])

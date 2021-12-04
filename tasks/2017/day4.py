@@ -4,7 +4,7 @@ DATA = data_path(__file__)
 
 
 def puzzle1():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     def is_valid(line):
@@ -16,12 +16,12 @@ def puzzle1():
 
 
 def puzzle2():
-    with open(DATA, 'r') as f:
+    with open(DATA, "r") as f:
         lines = f.readlines()
 
     def is_valid(line):
         words = line.split()
-        words_set = set(''.join(sorted(word)) for word in words)
+        words_set = set("".join(sorted(word)) for word in words)
         return len(words) == len(words_set)
 
     result = sum(map(is_valid, lines))
