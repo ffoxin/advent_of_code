@@ -1,6 +1,6 @@
 from pathlib import Path
 
-DATA = (Path(__file__).parent / 'data' / 'day1.txt').read_text()
+DATA = (Path(__file__).parent / 'data' / (Path(__file__).stem + '.txt')).read_text()
 
 
 def puzzle1():

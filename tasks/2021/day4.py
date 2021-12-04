@@ -1,8 +1,8 @@
-from itertools import product, chain
+from itertools import chain
 from pathlib import Path
 from typing import List, Set
 
-DATA = (Path(__file__).parent / 'data' / 'day4.txt').read_text()
+DATA = (Path(__file__).parent / 'data' / (Path(__file__).stem + '.txt')).read_text()
 
 
 class Card:
