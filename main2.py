@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import sys
 from importlib import import_module
 from pathlib import Path
 from typing import Optional, Tuple
+
+import click
 
 DAY_FORMAT = 'day{}.py'
 PUZZLE_FORMAT = 'puzzle{}'
@@ -55,49 +56,39 @@ def parse_day(value: str) -> Tuple[Optional[int], Optional[int]]:
     return day, puzzle
 
 
-def main():
+@click.command()
+@click.argument('day', type=click.IntRange(min=1, max=25), required=False)
+@click.argument('year', type=click.IntRange(min=2015, max=2021), required=False)
+def main(day, year):
     current_path = Path(__file__)
     project_dir = current_path.parent
     tasks_path = project_dir / 'tasks'
     template_path = project_dir / 'tasks' / 'template2.py'
 
-    args = sys.argv[1:]
-    year = None
-    day = None
     puzzle = None
-
-    for arg in args:
-        if arg.isdigit():
-            if int(arg) > 1000:
-                year = arg
-                continue
-            else:
-                day = arg
-        else:
-            day, puzzle = parse_day(arg)
 
     if year is None:
         year_path = get_default_year_path(tasks_path)
     else:
-        year_path = tasks_path / year
+        year_path = tasks_path / str(year)
 
     if day is None:
         day_path = get_default_day_path(year_path)
     else:
         day_path = year_path / DAY_FORMAT.format(day)
 
-    data = year_path / 'data' / (day_path.stem + '.txt')
+    data_path = year_path / 'data' / (day_path.stem + '.txt')
 
-    if not data.exists():
-        data.touch()
+    if not data_path.exists():
+        data_path.touch()
 
     if not day_path.exists():
         day_path.touch()
-        day_path.write_text(template_path.read_text().format(str(data.name)))
+        day_path.write_text(template_path.read_text().format(str(data_path.name)))
 
     day_path_relative = str(day_path)[len(str(project_dir)) + 1:]
     puzzle_module = day_path_relative.replace('.py', '').replace('/', '.')
-    print(f'Puzzle module: {puzzle_module}')
+    click.secho(f'{"Module: ":<10s}{puzzle_module}', fg='bright_black')
     module = import_module(puzzle_module)
 
     if puzzle:
@@ -106,10 +97,8 @@ def main():
         puzzle_id = 2 if hasattr(module, PUZZLE_FORMAT.format(2)) else 1
     puzzle_name = PUZZLE_FORMAT.format(puzzle_id)
 
-    print('year:', year_path)
-    print('day:', day_path)
-    print('puzzle:', puzzle_name)
-    print('data:', data)
+    click.secho(f'{"Data: ":<10s}{data_path.relative_to(current_path.parent)}', fg='bright_black')
+    click.secho(f'{"Puzzle: ":<10s}{puzzle_name}', fg='green')
 
     getattr(module, puzzle_name)()
 
