@@ -23,11 +23,8 @@ def puzzle1():
     entries = list(filter(bool, DATA.split("\n")))
 
     result = sum(
-        [
-            strategy[f"{opponent[line[0]]} {player[line[-1]]}"]
-            + costs[player[line[-1]]]
-            for line in entries
-        ]
+        strategy[f"{opponent[line[0]]} {player[line[-1]]}"] + costs[player[line[-1]]]
+        for line in entries
     )
     print(result)
 
@@ -40,9 +37,9 @@ def puzzle2():
 
     result = 0
     for line in entries:
-        for key in strategy:
-            if key[0] == opponent[line[0]] and strategy[key] == part2[line[-1]]:
-                result += strategy[key] + costs[key[-1]]
+        for key, value in strategy.items():
+            if key[0] == opponent[line[0]] and value == part2[line[-1]]:
+                result += value + costs[key[-1]]
                 break
     print(result)
 

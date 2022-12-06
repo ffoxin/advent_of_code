@@ -11,8 +11,7 @@ def puzzle1():
         else:
             if elves[-1] == 0:
                 continue
-            else:
-                elves.append(0)
+            elves.append(0)
 
     if elves[-1] == 0:
         elves.pop(-1)
@@ -28,8 +27,7 @@ def puzzle2():
         else:
             if elves[-1] == 0:
                 continue
-            else:
-                elves.append(0)
+            elves.append(0)
 
     if elves[-1] == 0:
         elves.pop(-1)
