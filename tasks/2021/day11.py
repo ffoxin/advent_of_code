@@ -34,7 +34,6 @@ class Field:
                         if (row + i, col + j) not in flashed:
                             self.inc(row + i, col + j)
             if last_size == len(flashed):
-
                 break
 
         return len(flashed) == len(self.entries) * len(self.entries[0])

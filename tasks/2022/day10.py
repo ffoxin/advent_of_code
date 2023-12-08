@@ -14,7 +14,6 @@ def puzzle1():
     result = 0
 
     while True:
-
         if rest == 1:
             assert value is not None
             x += value
@@ -55,7 +54,6 @@ def puzzle2():
     line_iter = iter(entries)
 
     while True:
-
         cycle += 1
 
         if cycle <= 240:

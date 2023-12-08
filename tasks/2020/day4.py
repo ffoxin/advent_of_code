@@ -64,7 +64,7 @@ def puzzle2():
                 if not (eyr.isdigit() and 2020 <= int(eyr) <= 2030):
                     is_valid = False
                 hgt: str = passport_data["hgt"]
-                if not hgt[-2:] in ("cm", "in"):
+                if hgt[-2:] not in ("cm", "in"):
                     is_valid = False
                 if hgt.endswith("cm") and not (
                     hgt[:-2].isdigit() and 150 <= int(hgt[:-2]) <= 193

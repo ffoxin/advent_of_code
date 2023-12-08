@@ -1,6 +1,5 @@
 from collections import Counter
 
-from main import data_path
 
 RANGE = (172851, 675869)
 

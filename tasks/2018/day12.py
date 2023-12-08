@@ -1,6 +1,3 @@
-from collections import deque
-from copy import copy
-
 from main import data_path
 
 DATA = data_path(__file__)

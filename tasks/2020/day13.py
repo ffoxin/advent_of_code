@@ -1,4 +1,3 @@
-from itertools import product
 from pathlib import Path
 
 DATA = (Path(__file__).parent / "data" / "day13.txt").read_text()

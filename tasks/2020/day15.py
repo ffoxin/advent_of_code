@@ -1,4 +1,3 @@
-from collections import deque, defaultdict, Counter
 from pathlib import Path
 
 DATA = (Path(__file__).parent / "data" / "day15.txt").read_text()

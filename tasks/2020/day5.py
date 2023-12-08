@@ -9,11 +9,11 @@ def get_seat_id(code: str):
     row = 0
     for i, letter in enumerate(reversed(row_code)):
         if letter == "B":
-            row += 2 ** i
+            row += 2**i
     col = 0
     for i, letter in enumerate(reversed(col_code)):
         if letter == "R":
-            col += 2 ** i
+            col += 2**i
     seat_id = row * 8 + col
     # print(row_code, col_code)
     # print(row, col)

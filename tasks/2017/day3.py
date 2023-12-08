@@ -5,7 +5,7 @@ VALUE = 347991
 
 def calc_len(value):
     sqr = int(sqrt(value))
-    sq1 = sqr ** 2
+    sq1 = sqr**2
     sq2 = (sqr + 1) ** 2
     mid = (sq1 + sq2 - 1) // 2
     if sqr % 2 == 0:

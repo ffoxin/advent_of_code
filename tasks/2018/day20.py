@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from main import data_path
 
 DATA = data_path(__file__)

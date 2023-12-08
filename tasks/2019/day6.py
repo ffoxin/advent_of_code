@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from main import data_path
 
 DATA = data_path(__file__)
@@ -13,20 +11,6 @@ class Link:
 def puzzle1():
     with open(DATA) as f:
         lines = list(map(str.strip, f.readlines()))
-
-    lines1 = [
-        "COM)B",
-        "B)C",
-        "C)D",
-        "D)E",
-        "E)F",
-        "B)G",
-        "G)H",
-        "D)I",
-        "E)J",
-        "J)K",
-        "K)L",
-    ]
 
     orbits = {}
     for line in lines:
@@ -48,22 +32,6 @@ def puzzle1():
 def puzzle2():
     with open(DATA) as f:
         lines = list(map(str.strip, f.readlines()))
-
-    lines1 = [
-        "COM)B",
-        "B)C",
-        "C)D",
-        "D)E",
-        "E)F",
-        "B)G",
-        "G)H",
-        "D)I",
-        "E)J",
-        "J)K",
-        "K)L",
-        "K)YOU",
-        "I)SAN",
-    ]
 
     orbits = {}
     for line in lines:

@@ -1,5 +1,4 @@
 import operator
-from itertools import chain
 from pathlib import Path
 
 DATA = (Path(__file__).parent / "data" / "day23.txt").read_text()

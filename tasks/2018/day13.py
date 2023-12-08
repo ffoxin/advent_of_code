@@ -1,5 +1,4 @@
 from enum import unique, Enum, auto
-from functools import partial
 from itertools import cycle
 from operator import attrgetter
 
@@ -93,19 +92,19 @@ class Cart:
         if cell.dir == Dir.Any:
             next_turn = next(self.turn)
             if next_turn == Move.Left:
-                self.move = self.move.left()
+                self.move = self.move.l_value()
             elif next_turn == Move.Right:
-                self.move = self.move.right()
+                self.move = self.move.r_value()
         elif cell.dir == Dir.Diag:
             if self.move in (Move.Up, Move.Down):
-                self.move = self.move.right()
+                self.move = self.move.r_value()
             elif self.move in (Move.Right, Move.Left):
-                self.move = self.move.left()
+                self.move = self.move.l_value()
         elif cell.dir == Dir.RevDiag:
             if self.move in (Move.Up, Move.Down):
-                self.move = self.move.left()
+                self.move = self.move.l_value()
             elif self.move in (Move.Right, Move.Left):
-                self.move = self.move.right()
+                self.move = self.move.r_value()
 
         if self.move == Move.Right:
             self.x += 1

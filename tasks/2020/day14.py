@@ -29,11 +29,11 @@ def puzzle1():
                     Cmd.MASK,
                     (
                         sum(
-                            0 if bit == "0" else 2 ** index
+                            0 if bit == "0" else 2**index
                             for index, bit in enumerate(reversed(value))
                         ),
                         sum(
-                            2 ** index if bit == "1" else 0
+                            2**index if bit == "1" else 0
                             for index, bit in enumerate(reversed(value))
                         ),
                     ),
@@ -74,7 +74,6 @@ def puzzle2():
     entries = [i for i in DATA.split("\n") if i]
 
     def replace_multiple(source, old: str, new: Iterable[str]):
-
         source = source.replace("0", ".").replace(
             "1", "-"
         )  # this needs for correct submasks
@@ -92,24 +91,24 @@ def puzzle2():
                     (
                         (
                             sum(
-                                0 if bit == "X" else 2 ** index
+                                0 if bit == "X" else 2**index
                                 for index, bit in enumerate(reversed(value))
                             ),
                             sum(
-                                2 ** index if bit == "1" else 0
+                                2**index if bit == "1" else 0
                                 for index, bit in enumerate(reversed(value))
                             ),
                         ),
                         [
                             (
                                 sum(
-                                    0 if bit == "0" else 2 ** index
+                                    0 if bit == "0" else 2**index
                                     for index, bit in enumerate(
                                         reversed(replace_multiple(value, "X", seq))
                                     )
                                 ),
                                 sum(
-                                    2 ** index if bit == "1" else 0
+                                    2**index if bit == "1" else 0
                                     for index, bit in enumerate(
                                         reversed(replace_multiple(value, "X", seq))
                                     )
@@ -141,7 +140,7 @@ def puzzle2():
 
     def print_it(val):
         return "".join(
-            reversed(list(map(str, (int(bool((2 ** i) & val)) for i in range(36)))))
+            reversed(list(map(str, (int(bool((2**i) & val)) for i in range(36)))))
         )
 
     and_, or_, pairs = None, None, None

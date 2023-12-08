@@ -1,7 +1,6 @@
 import re
 from pathlib import Path
 
-from tabulate import tabulate
 
 DATA = (Path(__file__).parent / "data" / "day2.txt").read_text()
 
