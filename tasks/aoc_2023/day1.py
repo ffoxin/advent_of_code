@@ -3,7 +3,7 @@ from pathlib import Path
 DATA = (Path(__file__).parent / "data" / (Path(__file__).stem + ".txt")).read_text()
 
 
-def puzzle1():
+def puzzle1() -> None:
     entries = list(filter(bool, DATA.split("\n")))
     result = 0
     for entry in entries:
@@ -14,7 +14,7 @@ def puzzle1():
     print(result)
 
 
-def puzzle2():
+def puzzle2() -> None:
     entries = list(filter(bool, DATA.split("\n")))
     valid_values = {str(i): i for i in range(10)}
     valid_values.update(
@@ -43,11 +43,15 @@ def puzzle2():
             if left and right:
                 break
 
+        assert left is not None
+        assert right is not None
+
         result += left * 10 + right
 
     print(result)
 
 
+# pylint: disable=duplicate-code
 if __name__ == "__main__":
     try:
         puzzle2()

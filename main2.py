@@ -12,9 +12,7 @@ PUZZLE_FORMAT = "puzzle{}"
 
 def get_default_year_path(tasks_path: Path) -> Path:
     years = [
-        item.name
-        for item in tasks_path.iterdir()
-        if item.is_dir() and item.name.isdigit()
+        item.name for item in tasks_path.iterdir() if item.is_dir() and item.name.startswith("aoc_")
     ]
     last_year = sorted(years)[-1]
 
@@ -35,20 +33,14 @@ def get_default_day_path(default_year_path: Path) -> Path:
     return default_year_path / DAY_FORMAT.format(days[-1])
 
 
-def to_int(value, default: int = None) -> Optional[int]:
-    try:
-        result = int(value)
-    except ValueError:
-        result = default
-
-    return result
-
-
 def parse_day(value: str) -> Tuple[Optional[int], Optional[int]]:
+    day: Optional[int]
+    puzzle: Optional[int]
+
     if "." in value:
-        day, puzzle = value.split(".")
-        day = int(day) if day else None
-        puzzle = int(puzzle) or None
+        day_str, puzzle_str = value.split(".")
+        day = int(day_str) if day_str else None
+        puzzle = int(puzzle_str) or None
     else:
         day = int(value)
         puzzle = None
@@ -59,7 +51,7 @@ def parse_day(value: str) -> Tuple[Optional[int], Optional[int]]:
 @click.command()
 @click.argument("day", type=click.IntRange(min=1, max=25), required=False)
 @click.argument("year", type=click.IntRange(min=2015, max=2021), required=False)
-def main(day, year):
+def main(day: int, year: int):
     current_path = Path(__file__)
     project_dir = current_path.parent
     tasks_path = project_dir / "tasks"
@@ -70,7 +62,7 @@ def main(day, year):
     if year is None:
         year_path = get_default_year_path(tasks_path)
     else:
-        year_path = tasks_path / str(year)
+        year_path = tasks_path / f"aoc_{year}"
 
     if day is None:
         day_path = get_default_day_path(year_path)
@@ -107,4 +99,4 @@ def main(day, year):
 
 
 if __name__ == "__main__":
-    main()
+    main()  # pylint: disable=no-value-for-parameter

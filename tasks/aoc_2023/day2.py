@@ -8,6 +8,7 @@ from pathlib import Path
 DATA = (Path(__file__).parent / "data" / (Path(__file__).stem + ".txt")).read_text()
 
 
+# pylint: disable=invalid-name
 @unique
 class Colors(StrEnum):
     red = auto()
@@ -19,7 +20,7 @@ GAME_ID_TEMPLATE = re.compile(r"Game (\d+)")
 CUBES_COLOR_TEMPLATE = re.compile(r"(\d+) ([a-z]+)(?:, )?")
 
 
-def puzzle1():
+def puzzle1() -> None:
     entries: list[str] = list(filter(bool, DATA.split("\n")))
     max_cubes: dict[Colors, int] = {
         Colors.red: 12,
@@ -31,7 +32,9 @@ def puzzle1():
         game: str
         sets: str
         game, sets = line.split(": ")
-        game_id: int = int(GAME_ID_TEMPLATE.fullmatch(game).group(1))
+        match = GAME_ID_TEMPLATE.fullmatch(game)
+        assert match is not None
+        game_id: int = int(match.group(1))
         steps: list[str] = sets.split("; ")
         is_valid: bool = True
         step: str
@@ -51,19 +54,12 @@ def puzzle1():
     print(result)
 
 
-def puzzle2():
+def puzzle2() -> None:
     entries: list[str] = list(filter(bool, DATA.split("\n")))
-    # max_cubes: dict[Colors, int] = {
-    #     Colors.red: 12,
-    #     Colors.green: 13,
-    #     Colors.blue: 14,
-    # }
     result = 0
     for line in entries:
-        game: str
         sets: str
-        game, sets = line.split(": ")
-        # game_id: int = int(GAME_ID_TEMPLATE.fullmatch(game).group(1))
+        _, sets = line.split(": ")
         steps: list[str] = sets.split("; ")
         step: str
         min_cubes: dict[Colors, int] = defaultdict(int)
@@ -79,6 +75,7 @@ def puzzle2():
     print(result)
 
 
+# pylint: disable=duplicate-code
 if __name__ == "__main__":
     try:
         puzzle2()

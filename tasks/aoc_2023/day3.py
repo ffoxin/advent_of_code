@@ -19,7 +19,7 @@ class Number(Point):
     value: int
 
 
-def puzzle1():
+def puzzle1() -> None:
     entries: list[str] = list(filter(bool, DATA.split("\n")))
     numbers: list[Number] = []
     symbols: dict[int, list[Point]] = defaultdict(list)
@@ -72,7 +72,7 @@ def puzzle1():
     print(result)
 
 
-def puzzle2():
+def puzzle2() -> None:
     entries: list[str] = list(filter(bool, DATA.split("\n")))
     numbers: list[Number] = []
     symbols: dict[int, list[Point]] = defaultdict(list)
@@ -125,6 +125,7 @@ def puzzle2():
     print(result)
 
 
+# pylint: disable=duplicate-code
 if __name__ == "__main__":
     try:
         puzzle2()
